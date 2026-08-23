@@ -1,4 +1,4 @@
-namespace GameJAM.scripts.Core
+namespace GameJAM.Scripts.Core
 {
     public enum LogLevel {DEBUG, INFO, WARNING, ERROR};
 

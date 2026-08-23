@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Security.Cryptography.X509Certificates;
 
-namespace GameJAM.scripts.Gameplay
+namespace GameJAM.Scripts.Gameplay
 {
 
 	// Class that represents any card 
