@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://k8ykbp3hdrmx"]
+
+[ext_resource type="PackedScene" uid="uid://yei1irdal0fl" path="res://Scenes/volume_slider.tscn" id="1_kftxf"]
+[ext_resource type="Script" uid="uid://dkfvp2q8rdpxx" path="res://Scripts/back_button.gd" id="2_663nc"]
+[ext_resource type="Script" uid="uid://chne8d3fkm2jb" path="res://Scripts/fullscreen.gd" id="2_hvj8k"]
+[ext_resource type="Script" uid="uid://dfsfxj8y1inbd" path="res://Scripts/play_sound.gd" id="3_hvj8k"]
+[ext_resource type="AudioStream" uid="uid://da1lomh0lqlvs" path="res://Assets/Kitsune2 - Rainbow Tylenol.mp3" id="4_38txh"]
+[ext_resource type="AudioStream" uid="uid://cfcljvsq70pul" path="res://Assets/Pikmin sound effect.mp3" id="5_5a0sy"]
+
+[node name="Options" type="Node2D" unique_id=1169768814]
+
+[node name="options_box" type="Panel" parent="." unique_id=58096485]
+offset_left = 193.0
+offset_top = 56.0
+offset_right = 718.0
+offset_bottom = 553.0
+
+[node name="audio" type="Label" parent="options_box" unique_id=1934384375]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 27.0
+offset_right = 145.0
+offset_bottom = 71.0
+theme_override_font_sizes/font_size = 28
+text = "Audio"
+
+[node name="audio_slider" parent="options_box/audio" unique_id=852252699 instance=ExtResource("1_kftxf")]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 8.0
+offset_right = 414.0
+offset_bottom = 31.625
+bus_name = "Master"
+
+[node name="music" type="Label" parent="options_box" unique_id=1714436154]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 86.0
+offset_right = 145.0
+offset_bottom = 130.0
+theme_override_font_sizes/font_size = 28
+text = "Music"
+
+[node name="music_slider" parent="options_box/music" unique_id=1246068127 instance=ExtResource("1_kftxf")]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 12.0
+offset_right = 413.0
+offset_bottom = 35.625
+bus_name = "Music"
+
+[node name="sfx" type="Label" parent="options_box" unique_id=1169580996]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 147.0
+offset_right = 145.0
+offset_bottom = 191.0
+theme_override_font_sizes/font_size = 28
+text = "SFX"
+
+[node name="sfx_slider" parent="options_box/sfx" unique_id=1777314991 instance=ExtResource("1_kftxf")]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 10.0
+offset_right = 411.0
+offset_bottom = 33.625
+bus_name = "SFX"
+
+[node name="Fullscreen" type="CheckBox" parent="options_box" unique_id=440904698]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 206.0
+offset_right = 246.0
+offset_bottom = 253.0
+theme_override_font_sizes/font_size = 28
+text = "Fullscreen"
+icon_alignment = 2
+script = ExtResource("2_hvj8k")
+
+[node name="back_button" type="Control" parent="." unique_id=1952188489]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_663nc")
+
+[node name="Button" type="Button" parent="back_button" unique_id=757395950]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 37.0
+offset_bottom = 38.476192
+text = "<"
+
+[node name="testes" type="Node" parent="." unique_id=1879147987]
+
+[node name="play_sound" type="Button" parent="testes" unique_id=521540106]
+offset_left = 25.0
+offset_top = 154.0
+offset_right = 133.0
+offset_bottom = 201.0
+text = "play sound"
+script = ExtResource("3_hvj8k")
+
+[node name="music" type="AudioStreamPlayer" parent="testes" unique_id=976762280]
+stream = ExtResource("4_38txh")
+autoplay = true
+bus = &"Music"
+
+[node name="audio" type="AudioStreamPlayer" parent="testes" unique_id=532482487]
+
+[node name="sfx" type="AudioStreamPlayer" parent="testes" unique_id=40134236]
+stream = ExtResource("5_5a0sy")
+bus = &"SFX"
+
+[connection signal="toggled" from="options_box/Fullscreen" to="options_box/Fullscreen" method="_on_toggled"]
+[connection signal="pressed" from="back_button/Button" to="back_button" method="_on_button_pressed"]
+[connection signal="pressed" from="testes/play_sound" to="testes/play_sound" method="_on_pressed"]
