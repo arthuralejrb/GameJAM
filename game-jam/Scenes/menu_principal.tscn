@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://cia4p16rnyjd1"]
+
+[ext_resource type="Script" uid="uid://54rtkn7yobms" path="res://Scripts/menu_principal.gd" id="1_gjtjt"]
+
+[node name="Menu Principal" type="Node2D" unique_id=2029866759]
+script = ExtResource("1_gjtjt")
+
+[node name="button_manager" type="Control" parent="." unique_id=652410115]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Start" type="Button" parent="button_manager" unique_id=672894720]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 7.025
+anchor_top = 7.05
+anchor_right = 7.025
+anchor_bottom = 7.05
+offset_top = -101.0
+offset_right = 322.0
+offset_bottom = -37.0
+text = "Start"
+metadata/_edit_use_anchors_ = true
+
+[node name="Options" type="Button" parent="button_manager" unique_id=938326591]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 7.05
+anchor_top = 4.725
+anchor_right = 7.05
+anchor_bottom = 4.725
+offset_top = 72.0
+offset_right = 322.0
+offset_bottom = 136.0
+text = "Options"
+metadata/_edit_use_anchors_ = true
+
+[node name="Quit" type="Button" parent="button_manager" unique_id=635209033]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 7.05
+anchor_top = 8.925
+anchor_right = 7.05
+anchor_bottom = 8.925
+offset_top = -17.0
+offset_right = 322.0
+offset_bottom = 47.0
+text = "Quit"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="button_manager/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="button_manager/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="button_manager/Quit" to="." method="_on_quit_pressed"]
