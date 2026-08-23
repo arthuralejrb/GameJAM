@@ -32,6 +32,7 @@ namespace GameJAM.scripts.Gameplay
 		private List<Card> _deck = new List<Card>();
 		private Random _rng = new Random();
 
+		// create a new deck
 		public void CreateDeck(double trapChance)
 		{
 			int j = 0;
@@ -71,6 +72,7 @@ namespace GameJAM.scripts.Gameplay
 			Shuffle(); 
 		}
 
+		// function to shuffle the deck
 		public void Shuffle()
 		{
 			int n = _deckSize;

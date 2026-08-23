@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://b8jnovv8ib11v"]
+
+[ext_resource type="Script" uid="uid://pdxlskeocrgp" path="res://Scripts/Gameplay/MainGameManager.cs" id="1_jjgbg"]
+
+[node name="Main" type="Node2D" unique_id=1440761591]
+script = ExtResource("1_jjgbg")
+
+[node name="MainUI" type="CanvasLayer" parent="." unique_id=1879224061]
+
+[node name="Score" type="Control" parent="MainUI" unique_id=1480492097]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerScore" type="Label" parent="MainUI/Score" unique_id=868210630]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="DealerScore" type="Label" parent="MainUI/Score" unique_id=679636381]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Bankroll" type="Label" parent="MainUI/Score" unique_id=1323755280]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Debt" type="Label" parent="MainUI/Score" unique_id=1191794649]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Status" type="Control" parent="MainUI" unique_id=1358498097]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Buttons" type="Control" parent="MainUI" unique_id=721800406]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Hit" type="Button" parent="MainUI/Buttons" unique_id=1789558300]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Stand" type="Button" parent="MainUI/Buttons" unique_id=1412597914]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Trash" type="Button" parent="MainUI/Buttons" unique_id=1639164472]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="CardSlots" type="Node2D" parent="." unique_id=1196114092]
+
+[node name="PlayerHand" type="HBoxContainer" parent="CardSlots" unique_id=1662322512]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DealerHand" type="HBoxContainer" parent="CardSlots" unique_id=1318611910]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TrashSlot" type="HBoxContainer" parent="CardSlots" unique_id=327615079]
+offset_right = 40.0
+offset_bottom = 40.0
