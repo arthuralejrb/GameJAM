@@ -11,7 +11,7 @@ namespace GameJAM.Scripts.Gameplay
 	public class Card
 	{ 
 		public int visibleValue;
-		public int realValue; // ace == 0;
+		public int realValue; // ace == 0 // J == 11 // Q == 12 // K == 13;
 		public Suits cardSuit;
 		public CardType cardType;
 
@@ -46,7 +46,7 @@ namespace GameJAM.Scripts.Gameplay
 					Suits cardSuit = suit;
 					CardType cardType = CardType.Normal;
 				
-					if(j < 10 ) {j++;}
+					j++;
 
 					// checks if its a cheated card
 					if(_rng.NextDouble() < trapChance)

@@ -2,19 +2,22 @@
 
 [ext_resource type="Script" uid="uid://pdxlskeocrgp" path="res://Scripts/Gameplay/MainGameManager.cs" id="1_jjgbg"]
 
-[node name="Main" type="Node2D" unique_id=1440761591 node_paths=PackedStringArray("Score", "PlayerScore", "DealerScore", "Status", "BankRoll", "Debt", "Bet", "Buttons", "Hit", "Stand", "Trash")]
+[node name="Main" type="Node2D" unique_id=1440761591 node_paths=PackedStringArray("Score", "PlayerScoreLabel", "DealerScoreLabel", "StatusControl", "BankRollLabel", "DebtLabel", "BetLabel", "ResultLabel", "ButtonsControl", "HitButton", "StandButton", "TrashButton", "PlayerHandContainer", "DealerHandContainer")]
 script = ExtResource("1_jjgbg")
 Score = NodePath("MainUI/ScoreControl")
-PlayerScore = NodePath("MainUI/ScoreControl/PlayerScoreLabel")
-DealerScore = NodePath("MainUI/ScoreControl/DealerScoreLabel")
-Status = NodePath("MainUI/StatusControl")
-BankRoll = NodePath("MainUI/StatusControl/BankRollLabel")
-Debt = NodePath("MainUI/StatusControl/DebtLabel")
-Bet = NodePath("MainUI/StatusControl/BetLabel")
-Buttons = NodePath("MainUI/ButtonsControl")
-Hit = NodePath("MainUI/ButtonsControl/HitButton")
-Stand = NodePath("MainUI/ButtonsControl/StandButton")
-Trash = NodePath("MainUI/ButtonsControl/TrashButton")
+PlayerScoreLabel = NodePath("MainUI/ScoreControl/PlayerScoreLabel")
+DealerScoreLabel = NodePath("MainUI/ScoreControl/DealerScoreLabel")
+StatusControl = NodePath("MainUI/StatusControl")
+BankRollLabel = NodePath("MainUI/StatusControl/BankRollLabel")
+DebtLabel = NodePath("MainUI/StatusControl/DebtLabel")
+BetLabel = NodePath("MainUI/StatusControl/BetLabel")
+ResultLabel = NodePath("MainUI/StatusControl/ResultLabel")
+ButtonsControl = NodePath("MainUI/ButtonsControl")
+HitButton = NodePath("MainUI/ButtonsControl/HitButton")
+StandButton = NodePath("MainUI/ButtonsControl/StandButton")
+TrashButton = NodePath("MainUI/ButtonsControl/TrashButton")
+PlayerHandContainer = NodePath("CardSlots/PlayerHandContainer")
+DealerHandContainer = NodePath("CardSlots/DealerHandContainer")
 
 [node name="MainUI" type="CanvasLayer" parent="." unique_id=1879224061]
 
@@ -26,13 +29,19 @@ offset_bottom = 40.0
 
 [node name="PlayerScoreLabel" type="Label" parent="MainUI/ScoreControl" unique_id=868210630]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 143.0
+offset_top = 579.0
+offset_right = 243.0
+offset_bottom = 602.0
+text = "Player Score:"
 
 [node name="DealerScoreLabel" type="Label" parent="MainUI/ScoreControl" unique_id=679636381]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 143.0
+offset_top = 41.0
+offset_right = 249.0
+offset_bottom = 64.0
+text = "Dealer Score:"
 
 [node name="StatusControl" type="Control" parent="MainUI" unique_id=1358498097]
 layout_mode = 3
@@ -42,55 +51,100 @@ offset_bottom = 40.0
 
 [node name="BankRollLabel" type="Label" parent="MainUI/StatusControl" unique_id=1323755280]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 868.0
+offset_top = 32.0
+offset_right = 938.0
+offset_bottom = 55.0
+text = "Bankroll:"
 
 [node name="DebtLabel" type="Label" parent="MainUI/StatusControl" unique_id=1191794649]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 871.0
+offset_top = 56.0
+offset_right = 956.0
+offset_bottom = 79.0
+text = "Total Debt:"
 
 [node name="BetLabel" type="Label" parent="MainUI/StatusControl" unique_id=1035791457]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 874.0
+offset_top = 77.0
+offset_right = 958.0
+offset_bottom = 100.0
+text = "Actual Bet:"
 
 [node name="ResultLabel" type="Label" parent="MainUI/StatusControl" unique_id=920243943]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 488.0
+offset_top = 45.0
+offset_right = 585.0
+offset_bottom = 68.0
+text = "Player wins: "
 
 [node name="ButtonsControl" type="Control" parent="MainUI" unique_id=721800406]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
+offset_left = -7.0
+offset_right = 33.0
 offset_bottom = 40.0
 
 [node name="HitButton" type="Button" parent="MainUI/ButtonsControl" unique_id=1789558300]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 879.0
+offset_top = 584.0
+offset_right = 1019.0
+offset_bottom = 615.0
+text = "HIT
+"
 
 [node name="StandButton" type="Button" parent="MainUI/ButtonsControl" unique_id=1412597914]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 881.0
+offset_top = 547.0
+offset_right = 1017.0
+offset_bottom = 578.0
+text = "STAND"
 
 [node name="TrashButton" type="Button" parent="MainUI/ButtonsControl" unique_id=1639164472]
+visible = false
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 755.0
+offset_top = 486.0
+offset_right = 888.0
+offset_bottom = 517.0
+text = "TRASH"
+
+[node name="NextRoundButton" type="Button" parent="MainUI/ButtonsControl" unique_id=1070100908]
+layout_mode = 0
+offset_left = 514.0
+offset_top = 300.0
+offset_right = 599.0
+offset_bottom = 331.0
+text = "Next"
 
 [node name="CardSlots" type="Node2D" parent="." unique_id=1196114092]
 
-[node name="PlayerHand" type="HBoxContainer" parent="CardSlots" unique_id=1662322512]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="PlayerHandContainer" type="HBoxContainer" parent="CardSlots" unique_id=1662322512]
+offset_left = 404.0
+offset_top = 507.0
+offset_right = 666.0
+offset_bottom = 604.0
+alignment = 1
 
-[node name="DealerHand" type="HBoxContainer" parent="CardSlots" unique_id=1318611910]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="DealerHandContainer" type="HBoxContainer" parent="CardSlots" unique_id=1318611910]
+offset_left = 433.0
+offset_top = 93.0
+offset_right = 628.0
+offset_bottom = 188.0
+alignment = 1
 
 [node name="TrashSlot" type="HBoxContainer" parent="CardSlots" unique_id=327615079]
-offset_right = 40.0
-offset_bottom = 40.0
+visible = false
+offset_left = -22.0
+offset_top = -33.0
+offset_right = 18.0
+offset_bottom = 7.0
+
+[connection signal="pressed" from="MainUI/ButtonsControl/HitButton" to="." method="OnHitButtonPressed"]
+[connection signal="pressed" from="MainUI/ButtonsControl/StandButton" to="." method="OnStandButtonPressed"]
+[connection signal="pressed" from="MainUI/ButtonsControl/NextRoundButton" to="." method="OnNextButtonPressed"]
