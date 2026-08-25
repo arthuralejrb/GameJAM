@@ -14,9 +14,6 @@ config/name="GameJAM"
 run/main_scene="uid://b8jnovv8ib11v"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 
-[audio]
-
-
 [display]
 
 window/size/viewport_width=900
