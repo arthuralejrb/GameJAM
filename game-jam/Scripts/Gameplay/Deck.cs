@@ -35,18 +35,17 @@ namespace GameJAM.Scripts.Gameplay
 		// create a new deck
 		public void CreateDeck(double trapChance)
 		{
-			int j = 0;
+			_deck.Clear();
+
 			foreach (Suits suit in Enum.GetValues<Suits>())
 			{	
-				j = 0;
-				for(int i = 0; i <= 12;i++)
+				
+				for(int i = 1; i <= 13;i++)
 				{
-					int realValue = j;
+					int realValue = i;
 					int visibleValue = realValue;
 					Suits cardSuit = suit;
 					CardType cardType = CardType.Normal;
-				
-					j++;
 
 					// checks if its a cheated card
 					if(_rng.NextDouble() < trapChance)
@@ -57,7 +56,7 @@ namespace GameJAM.Scripts.Gameplay
 
 						if(trapType ==  CardType.Illusory)
 						{
-							realValue = _rng.Next(0,10);
+							realValue = _rng.Next(1,11);
 
 						}
 
@@ -91,7 +90,7 @@ namespace GameJAM.Scripts.Gameplay
 		// function to draw a card from the deck
 		public Card DrawCard(double trapChance)	
 		{
-			int n = _deck.Count - 1;
+			int n = _deck.Count - 1 ;
 
 			// empty deck
 			if(n == 0)
