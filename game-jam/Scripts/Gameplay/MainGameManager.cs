@@ -87,23 +87,15 @@ public partial class MainGameManager : Node2D
 		StandButton.Disabled = true;
 		if (TrashButton != null) TrashButton.Disabled = true;
 
-		_playerScore = 0;
-		foreach (Card card in _playerHand)
-		{
-			_playerScore += card.realValue;
-		}
+		_playerScore = CalculateHandScore(_playerHand, true);
 
-		_dealerScore = 0;
-		foreach (Card card in _dealerHand)
-		{
-			_dealerScore += card.realValue;
-		}
+		_dealerScore = CalculateHandScore(_dealerHand, true);
 
 		while (_dealerScore < 17)
 		{
 			Card newCard = _deck.DrawCard(_trapChance);
 			_dealerHand.Add(newCard);
-			_dealerScore += newCard.realValue;
+			_dealerScore = CalculateHandScore(_dealerHand, true);
 		}
 
 		string roundMessage = "";
@@ -141,6 +133,20 @@ public partial class MainGameManager : Node2D
 		}
 	}
 
+	public void UpdateUI()
+	{
+		PlayerScoreLabel.Text = $"Player Score: {CalculateHandScore(_playerHand, false)}";
+		DealerScoreLabel.Text = $"Dealer Score: {CalculateHandScore(_dealerHand, false)}";
+
+		DebtLabel.Text = $"Total Debt: {_totalDebt}";
+		BankRollLabel.Text = $"Bankroll: {_bankRoll}";
+		ResultLabel.Text = $"Wins: {_playerWins}";
+
+		RenderHand(_playerHand, PlayerHandContainer, true);
+		RenderHand(_dealerHand, DealerHandContainer, true);
+
+	}
+
 	public void OnNextButtonPressed()
 	{
 
@@ -161,20 +167,6 @@ public partial class MainGameManager : Node2D
 		if (TrashButton != null) TrashButton.Disabled = false;
 
 		StartRound();
-	}
-
-	public void UpdateUI()
-	{
-		PlayerScoreLabel.Text = $"Player Score: {_playerScore}";
-		DealerScoreLabel.Text = $"Dealer Score: {_dealerScore}";
-	
-		DebtLabel.Text = $"Total Debt: {_totalDebt}";
-		BankRollLabel.Text = $"Bankroll: {_bankRoll}";
-		
-		ResultLabel.Text = $"Wins: {_playerWins}";
-		RenderHand(_playerHand, PlayerHandContainer, true);
-		RenderHand(_dealerHand, DealerHandContainer, true);
-		
 	}
 
 
@@ -214,10 +206,41 @@ public partial class MainGameManager : Node2D
 			trapTag.Set("theme_override_colors/font_color", Colors.Red);
 			cardSprite.AddChild(trapTag);	
 		}
-
-		container.AddChild(cardSprite);
 		
 		}
+	}
+
+	private int CalculateHandScore(List<Card> hand, bool useRealValue)
+	{
+	int score = 0;
+
+	foreach (Card card in hand)
+	{
+		if (useRealValue)
+		{
+			if (card.cardType == CardType.Illusory)
+			{
+				score += card.realValue;
+
+			}
+			else
+			{
+				int val = card.realValue;
+				if (val >= 11 && val <= 13) val = 10;
+				score += val;
+
+			}
+		}
+		else
+		{
+			int val = card.visibleValue;
+			if (val >= 11 && val <= 13) val = 10;
+			score += val;
+
+		}
+	}
+
+	return score;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
