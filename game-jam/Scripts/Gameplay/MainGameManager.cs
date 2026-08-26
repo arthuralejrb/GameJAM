@@ -2,28 +2,32 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 
 namespace GameJAM.Scripts.Gameplay
 {
 public partial class MainGameManager : Node2D
 {
-	private double _trapChance = 0.3;
+	private double _trapChance = 0.21;
 
 	private Deck _deck = new Deck();
 	private List<Card> _playerHand = new List<Card>();
 	private List<Card> _dealerHand = new List<Card>();
 	private Card _trashedCard = null;
 
+	// player match status
 	private int _playerScore = 0;
 	private int _dealerScore = 0;
 
 	private int _playerWins = 0;
 	private int _dealerWins = 0;
 
+	// player game status
 	private int _bankRoll = 300;
 	private int _totalDebt = 3000;
 	private int _actualBet = 0;
 
+	// all scene elements
 	[Export] public Control Score;
 	[Export] public Label PlayerScoreLabel;
 	[Export] public Label DealerScoreLabel;
@@ -56,7 +60,8 @@ public partial class MainGameManager : Node2D
 	}
 
 	public void StartRound()
-	{
+	{ // resets everything for a new round
+
 		_playerScore = 0;
 		_dealerScore = 0;
 		_playerHand.Clear();
@@ -65,6 +70,7 @@ public partial class MainGameManager : Node2D
 		_trashedCard = null;
 	
 		_playerHand.Add(_deck.DrawCard(_trapChance));
+		
 		_playerHand.Add(_deck.DrawCard(_trapChance));
 
 		_dealerHand.Add(_deck.DrawCard(_trapChance));
@@ -75,14 +81,17 @@ public partial class MainGameManager : Node2D
 
 
 	public void OnHitButtonPressed()
-	{
+	{ // asks for a card
+
 		_playerHand.Add(_deck.DrawCard(_trapChance));
+
 		UpdateUI();
 
 	}
 
 	public void OnStandButtonPressed()
-	{
+	{ // asks to stop the round
+
 		HitButton.Disabled = true;
 		StandButton.Disabled = true;
 		if (TrashButton != null) TrashButton.Disabled = true;
@@ -91,14 +100,17 @@ public partial class MainGameManager : Node2D
 
 		_dealerScore = CalculateHandScore(_dealerHand, true);
 
-		while (_dealerScore < 17)
+		// dealer buying cards to get his final score
+		while (_dealerScore < 17 && _dealerScore < _playerScore && _playerScore <= 21)
 		{
 			Card newCard = _deck.DrawCard(_trapChance);
 			_dealerHand.Add(newCard);
 			_dealerScore = CalculateHandScore(_dealerHand, true);
 		}
 
+		// gets the round result
 		string roundMessage = "";
+
 		if (_playerScore > 21)
 		{
 			_dealerWins++;
@@ -109,14 +121,10 @@ public partial class MainGameManager : Node2D
 			_playerWins++;
 			roundMessage = "VOCÊ VENCEU A RODADA!";
 		}
-		else if (_dealerScore > _playerScore)
+		else if (_dealerScore >= _playerScore)
 		{
 			_dealerWins++;
 			roundMessage = "O DEALER VENCEU!";
-		}
-		else
-		{
-			roundMessage = "EMPATE!";
 		}
 
 		PlayerScoreLabel.Text = $"Player Score REAL: {_playerScore}";
@@ -172,22 +180,30 @@ public partial class MainGameManager : Node2D
 
 	private void RenderHand(List<Card> hand, HBoxContainer container, bool hideSecretValues)
 	{
-
+		string spritePath = "";
 		foreach (Node child in container.GetChildren())
 		{
 			child.QueueFree();
 		}
 
+
 		foreach (Card card in hand)
 		{
 			TextureRect cardSprite = new TextureRect();
 			cardSprite.ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize;
-			cardSprite.CustomMinimumSize = new Vector2(160,200);
+			cardSprite.CustomMinimumSize = new Vector2(128,128);
 			cardSprite.StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered;
 
 			container.AddChild(cardSprite);
-		
-			string spritePath = $"res://Assets/Cartas/{card.cardSuit}/{card.visibleValue}.png";
+			if(hideSecretValues)
+			{
+				spritePath = $"res://Assets/Cartas/{card.cardSuit}/{card.visibleValue}.png";
+					
+			}else
+			{
+				spritePath = $"res://Assets/Cartas/{card.cardSuit}/{card.realValue}.png";
+					
+			}
 
 		if (ResourceLoader.Exists(spritePath))
 		{
@@ -212,35 +228,78 @@ public partial class MainGameManager : Node2D
 
 	private int CalculateHandScore(List<Card> hand, bool useRealValue)
 	{
-	int score = 0;
+		int score = 0;
+		List<Card> aces = new List<Card>();
 
-	foreach (Card card in hand)
-	{
-		if (useRealValue)
-		{
-			if (card.cardType == CardType.Illusory)
+		foreach (Card card in hand)
+		{	
+			
+			if (useRealValue)
 			{
-				score += card.realValue;
+				if(card.realValue == 1)
+				{
+					aces.Add(card);
 
+				}else
+				{
+					int val = card.realValue;
+					if(card.realValue == 1)
+					{
+						if(score <= 11)
+						{
+							val = 10;
+
+						}else
+						{
+							val = 1;	
+							
+						}	
+						
+					}
+					if (val >= 11 && val <= 13) val = 10;
+					score += val;
+						
+				}
+			
 			}
 			else
 			{
-				int val = card.realValue;
+
+				int val = card.visibleValue;
+				if(card.visibleValue == 1)
+				{
+					if(score <= 11)
+					{
+						val = 10;
+
+					}else
+					{
+						val = 1;	
+						
+					}	
+					
+				}
+
 				if (val >= 11 && val <= 13) val = 10;
 				score += val;
 
 			}
 		}
-		else
+
+		foreach(Card ace in aces)
 		{
-			int val = card.visibleValue;
-			if (val >= 11 && val <= 13) val = 10;
-			score += val;
+			if(score <= 11)
+			{
+				score += 10;
 
+			}else
+			{
+				score += 1;
+
+			}	
 		}
-	}
 
-	return score;
+		return score;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

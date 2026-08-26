@@ -56,7 +56,11 @@ namespace GameJAM.Scripts.Gameplay
 
 						if(trapType ==  CardType.Illusory)
 						{
-							realValue = _rng.Next(1,11);
+							while(realValue == visibleValue)
+							{
+								realValue = _rng.Next(1,11);
+								
+							}
 
 						}
 
