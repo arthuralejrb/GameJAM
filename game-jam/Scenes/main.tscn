@@ -1,25 +1,27 @@
 [gd_scene format=3 uid="uid://b8jnovv8ib11v"]
 
 [ext_resource type="Script" uid="uid://pdxlskeocrgp" path="res://Scripts/Gameplay/MainGameManager.cs" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://bdbxgvk13klb3" path="res://Scripts/Gameplay/UIManager.cs" id="2_8gbba"]
+[ext_resource type="Script" uid="uid://81m453vri0o3" path="res://Scripts/Gameplay/MatchManager.cs" id="3_8gbba"]
 
-[node name="Main" type="Node2D" unique_id=1440761591 node_paths=PackedStringArray("Score", "PlayerScoreLabel", "DealerScoreLabel", "StatusControl", "BankRollLabel", "DebtLabel", "BetLabel", "ResultLabel", "ButtonsControl", "HitButton", "StandButton", "TrashButton", "PlayerHandContainer", "DealerHandContainer")]
+[node name="Main" type="Node2D" unique_id=1440761591 node_paths=PackedStringArray("UI")]
 script = ExtResource("1_jjgbg")
-Score = NodePath("MainUI/ScoreControl")
-PlayerScoreLabel = NodePath("MainUI/ScoreControl/PlayerScoreLabel")
-DealerScoreLabel = NodePath("MainUI/ScoreControl/DealerScoreLabel")
-StatusControl = NodePath("MainUI/StatusControl")
-BankRollLabel = NodePath("MainUI/StatusControl/BankRollLabel")
-DebtLabel = NodePath("MainUI/StatusControl/DebtLabel")
-BetLabel = NodePath("MainUI/StatusControl/BetLabel")
-ResultLabel = NodePath("MainUI/StatusControl/ResultLabel")
-ButtonsControl = NodePath("MainUI/ButtonsControl")
-HitButton = NodePath("MainUI/ButtonsControl/HitButton")
-StandButton = NodePath("MainUI/ButtonsControl/StandButton")
-TrashButton = NodePath("MainUI/ButtonsControl/TrashButton")
-PlayerHandContainer = NodePath("CardSlots/PlayerHandContainer")
-DealerHandContainer = NodePath("CardSlots/DealerHandContainer")
+UI = NodePath("MainUI")
 
-[node name="MainUI" type="CanvasLayer" parent="." unique_id=1879224061]
+[node name="MainUI" type="CanvasLayer" parent="." unique_id=1879224061 node_paths=PackedStringArray("PlayerScoreLabel", "DealerScoreLabel", "BankRollLabel", "DebtLabel", "BetLabel", "ResultLabel", "HitButton", "StandButton", "TrashButton", "NextRoundButton", "PlayerHandContainer", "DealerHandContainer")]
+script = ExtResource("2_8gbba")
+PlayerScoreLabel = NodePath("ScoreControl/PlayerScoreLabel")
+DealerScoreLabel = NodePath("ScoreControl/DealerScoreLabel")
+BankRollLabel = NodePath("StatusControl/BankRollLabel")
+DebtLabel = NodePath("StatusControl/DebtLabel")
+BetLabel = NodePath("StatusControl/BetLabel")
+ResultLabel = NodePath("StatusControl/ResultLabel")
+HitButton = NodePath("ButtonsControl/HitButton")
+StandButton = NodePath("ButtonsControl/StandButton")
+TrashButton = NodePath("ButtonsControl/TrashButton")
+NextRoundButton = NodePath("ButtonsControl/NextRoundButton")
+PlayerHandContainer = NodePath("../CardSlots/PlayerHandContainer")
+DealerHandContainer = NodePath("../CardSlots/DealerHandContainer")
 
 [node name="ScoreControl" type="Control" parent="MainUI" unique_id=1480492097]
 layout_mode = 3
@@ -123,6 +125,7 @@ offset_bottom = 331.0
 text = "Next"
 
 [node name="CardSlots" type="Node2D" parent="." unique_id=1196114092]
+script = ExtResource("3_8gbba")
 
 [node name="PlayerHandContainer" type="HBoxContainer" parent="CardSlots" unique_id=1662322512]
 offset_left = 404.0
