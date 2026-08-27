@@ -19,6 +19,55 @@ public partial class UIManager : CanvasLayer
 
 	[Export] public HBoxContainer PlayerHandContainer;
 	[Export] public HBoxContainer DealerHandContainer;
+	
+	[Export] public Control PauseMenuControl;
+	[Export] public Button ResumeButton;
+	[Export] public Button	OptionsButton;
+	[Export] public Button QuitButton;
+	
+	private const string _overlayPath = "res://Scenes/options.tscn"; 
+
+	public override void _UnhandledInput(InputEvent @event)
+	{
+		if (@event.IsActionPressed("ui_cancel"))
+		{
+			TogglePause();
+			GetViewport().SetInputAsHandled();
+
+		}
+	}
+
+
+	public void TogglePause()
+	{
+	
+		PauseMenuControl.Visible = !PauseMenuControl.Visible;
+		GetTree().Paused = PauseMenuControl.Visible;
+	
+	}
+
+
+	public void OnResumeButtonPressed()
+	{
+		TogglePause();
+
+	}
+
+	
+	public void OnOptionsButtonPressed()
+	{
+		ShowOverlay();
+		
+	}
+
+
+	public void OnQuitButtonPressed()
+	{
+		GetTree().Paused = false;
+		GetTree().ChangeSceneToFile("res://Scenes/menu_principal.tscn");
+
+	}
+
 
 	public void UpdateScores(int playerScore, int dealerScore, bool isReal = false)
 	{
@@ -26,6 +75,7 @@ public partial class UIManager : CanvasLayer
 		PlayerScoreLabel.Text = $"Player Score {prefix}{playerScore}";
 		DealerScoreLabel.Text = $"Dealer Score {prefix}{dealerScore}";
 	}
+
 
 	public void UpdateEconomy(int bankroll, int debt, int bet, int wins, string message = "")
 	{
@@ -39,6 +89,7 @@ public partial class UIManager : CanvasLayer
 			ResultLabel.Text = $"{message} (Wins: {wins})";
 	}
 
+
 	public void ToggleActionButtons(bool enabled)
 	{
 		HitButton.Disabled = !enabled;
@@ -46,14 +97,31 @@ public partial class UIManager : CanvasLayer
 		if (TrashButton != null) TrashButton.Disabled = !enabled;
 	}
 
+
 	public void ShowNextButton(bool show)
 	{
 		if (NextRoundButton != null)
 		{
 			NextRoundButton.Visible = show;
 			NextRoundButton.Disabled = !show;
+	
 		}
 	}
+
+
+	public void ShowOverlay()
+	{
+		PackedScene overlayScene = GD.Load<PackedScene>(_overlayPath);
+
+		if(overlayScene != null)
+		{
+			var overlayInstance = overlayScene.Instantiate<Node>();
+			overlayInstance.ProcessMode = ProcessModeEnum.Always;
+			AddChild(overlayInstance);		
+		
+		}
+	}
+
 
 	public void RenderHand(List<Card> hand, HBoxContainer container, bool hideSecretValues)
 	{

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GameJAM"
-run/main_scene="uid://b8jnovv8ib11v"
+run/main_scene="uid://cia4p16rnyjd1"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 
 [display]
