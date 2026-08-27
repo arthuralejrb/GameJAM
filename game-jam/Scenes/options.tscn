@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://k8ykbp3hdrmx"]
 
 [ext_resource type="PackedScene" uid="uid://yei1irdal0fl" path="res://Scenes/volume_slider.tscn" id="1_kftxf"]
-[ext_resource type="Script" uid="uid://dkfvp2q8rdpxx" path="res://Scripts/back_button.gd" id="2_663nc"]
-[ext_resource type="Script" uid="uid://chne8d3fkm2jb" path="res://Scripts/fullscreen.gd" id="2_hvj8k"]
+[ext_resource type="Script" uid="uid://dkfvp2q8rdpxx" path="res://Scripts/Ui/back_button.gd" id="2_663nc"]
+[ext_resource type="Script" uid="uid://chne8d3fkm2jb" path="res://Scripts/Ui/fullscreen.gd" id="2_hvj8k"]
 
 [node name="Options" type="Node2D" unique_id=1169768814]
 
@@ -81,7 +81,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_663nc")
 
-[node name="Button" type="Button" parent="back_button" unique_id=757395950]
+[node name="back_button" type="Button" parent="back_button" unique_id=757395950]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 6.0
@@ -90,4 +90,4 @@ offset_bottom = 38.476192
 text = "<"
 
 [connection signal="toggled" from="options_box/Fullscreen" to="options_box/Fullscreen" method="_on_toggled"]
-[connection signal="pressed" from="back_button/Button" to="back_button" method="_on_button_pressed"]
+[connection signal="pressed" from="back_button/back_button" to="back_button" method="_on_button_pressed"]
