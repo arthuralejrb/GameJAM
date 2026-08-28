@@ -25,7 +25,7 @@ public partial class UIManager : CanvasLayer
 	[Export] public Button	OptionsButton;
 	[Export] public Button QuitButton;
 	
-	private const string _overlayPath = "res://Scenes/options.tscn"; 
+	private const string _overlayPath = "res://Scenes/OptionsMenuScene.tscn"; 
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
@@ -64,7 +64,7 @@ public partial class UIManager : CanvasLayer
 	public void OnQuitButtonPressed()
 	{
 		GetTree().Paused = false;
-		GetTree().ChangeSceneToFile("res://Scenes/menu_principal.tscn");
+		GetTree().ChangeSceneToFile("res://Scenes/MainMenuScene.tscn");
 
 	}
 

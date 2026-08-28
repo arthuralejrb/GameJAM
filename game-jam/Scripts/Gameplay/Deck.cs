@@ -11,7 +11,7 @@ namespace GameJAM.Scripts.Gameplay
 	public class Card
 	{ 
 		public int visibleValue;
-		public int realValue; // ace == 0 // J == 11 // Q == 12 // K == 13;
+		public int realValue; // ace == 1 // J == 11 // Q == 12 // K == 13;
 		public Suits cardSuit;
 		public CardType cardType;
 

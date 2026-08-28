@@ -34,18 +34,18 @@ offset_bottom = 40.0
 
 [node name="PlayerScoreLabel" type="Label" parent="MainUI/ScoreControl" unique_id=868210630]
 layout_mode = 0
-offset_left = 143.0
-offset_top = 579.0
-offset_right = 243.0
-offset_bottom = 602.0
+offset_left = 896.0
+offset_top = 416.0
+offset_right = 996.0
+offset_bottom = 439.0
 text = "Player Score:"
 
 [node name="DealerScoreLabel" type="Label" parent="MainUI/ScoreControl" unique_id=679636381]
 layout_mode = 0
-offset_left = 143.0
-offset_top = 41.0
-offset_right = 249.0
-offset_bottom = 64.0
+offset_left = 888.0
+offset_top = 384.0
+offset_right = 994.0
+offset_bottom = 407.0
 text = "Dealer Score:"
 
 [node name="StatusControl" type="Control" parent="MainUI" unique_id=1358498097]
@@ -56,34 +56,34 @@ offset_bottom = 40.0
 
 [node name="BankRollLabel" type="Label" parent="MainUI/StatusControl" unique_id=1323755280]
 layout_mode = 0
-offset_left = 868.0
-offset_top = 32.0
-offset_right = 938.0
-offset_bottom = 55.0
+offset_left = 152.0
+offset_top = 64.0
+offset_right = 222.0
+offset_bottom = 87.0
 text = "Bankroll:"
 
 [node name="DebtLabel" type="Label" parent="MainUI/StatusControl" unique_id=1191794649]
 layout_mode = 0
-offset_left = 871.0
-offset_top = 56.0
-offset_right = 956.0
-offset_bottom = 79.0
+offset_left = 156.0
+offset_top = 88.0
+offset_right = 241.0
+offset_bottom = 111.0
 text = "Total Debt:"
 
 [node name="BetLabel" type="Label" parent="MainUI/StatusControl" unique_id=1035791457]
 layout_mode = 0
-offset_left = 874.0
-offset_top = 77.0
-offset_right = 958.0
-offset_bottom = 100.0
+offset_left = 158.0
+offset_top = 109.0
+offset_right = 242.0
+offset_bottom = 132.0
 text = "Actual Bet:"
 
 [node name="ResultLabel" type="Label" parent="MainUI/StatusControl" unique_id=920243943]
 layout_mode = 0
-offset_left = 488.0
-offset_top = 45.0
-offset_right = 585.0
-offset_bottom = 68.0
+offset_left = 904.0
+offset_top = 448.0
+offset_right = 1001.0
+offset_bottom = 471.0
 text = "Player wins: "
 
 [node name="ButtonsControl" type="Control" parent="MainUI" unique_id=721800406]
@@ -137,10 +137,10 @@ offset_bottom = 659.0
 
 [node name="ResumeButton" type="Button" parent="MainUI/PauseMenuControl" unique_id=587988499]
 layout_mode = 0
-offset_left = 498.0
-offset_top = 180.0
-offset_right = 591.0
-offset_bottom = 211.0
+offset_left = 600.0
+offset_top = 232.0
+offset_right = 693.0
+offset_bottom = 263.0
 text = "RESUME"
 
 [node name="OptionsButton" type="Button" parent="MainUI/PauseMenuControl" unique_id=424961114]
@@ -154,10 +154,10 @@ text = "Options
 
 [node name="QuitButton" type="Button" parent="MainUI/PauseMenuControl" unique_id=1692475061]
 layout_mode = 0
-offset_left = 492.0
-offset_top = 386.0
-offset_right = 596.0
-offset_bottom = 417.0
+offset_left = 360.0
+offset_top = 232.0
+offset_right = 464.0
+offset_bottom = 263.0
 text = "MAIN MENU
 "
 

@@ -7,4 +7,4 @@ func _on_button_pressed() -> void:
 		owner.queue_free() # ou get_node("/root/...")... mas 'owner' ou 'get_parent()' pega a tela toda!
 	else:
 		# Se foi aberta isolada/direta no menu principal, troca de cena
-		get_tree().change_scene_to_file("res://Scenes/menu_principal.tscn")
+		get_tree().change_scene_to_file("res://Scenes/MainMenuScene.tscn")
