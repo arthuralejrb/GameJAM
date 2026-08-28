@@ -54,38 +54,61 @@ public partial class MainGameManager : Node2D
 		UI.ToggleActionButtons(false);
 		_match.DealerTurn(_trapChance);
 
-		int playerScore = _match.CalculateScore(_match.PlayerHand, true);
-		int dealerScore = _match.CalculateScore(_match.DealerHand, true);
+		int playerScore = _match.CalculateScore(_match.playerHand, true);
+		int dealerScore = _match.CalculateScore(_match.dealerHand, true);
 
 		string roundMessage = "";
 		if (playerScore > 21)
 		{
-			_match.DealerWins++;
+			_match.dealerWins++;
 			roundMessage = "VOCÊ ESTOUROU! Derrota!";
 		}
 		else if (dealerScore > 21 || playerScore > dealerScore)
 		{
-			_match.PlayerWins++;
+			_match.playerWins++;
 			roundMessage = "VOCÊ VENCEU A RODADA!";
 		}
 		else
 		{
-			_match.DealerWins++;
+			_match.dealerWins++;
 			roundMessage = "O DEALER VENCEU!";
 		}
 
 		UI.UpdateScores(playerScore, dealerScore, true);
-		UI.UpdateEconomy(_bankRoll, _totalDebt, _actualBet, _match.PlayerWins, roundMessage);
-		UI.RenderHand(_match.PlayerHand, UI.PlayerHandContainer, false);
-		UI.RenderHand(_match.DealerHand, UI.DealerHandContainer, false);
+		UI.UpdateEconomy(_bankRoll, _totalDebt, _actualBet, _match.playerWins, roundMessage);
+		UI.RenderHand(_match.playerHand, UI.PlayerHandContainer, false);
+		UI.RenderHand(_match.dealerHand, UI.DealerHandContainer, false);
 
-		UI.ShowNextButton(true);
+		_match.totalRounds++;
+	
+		if(_match.playerWins != 2 && _match.dealerWins != 2)
+		{
+			UI.ShowNextButton(true);
+				
+		}else
+		{
+			var player = GetNode<Player>("/root/Player");
+			if(player == null) return;
+
+
+			if(_match.playerWins > _match.dealerWins)
+			{	
+				player.AddBankRoll(_actualBet * 2);
+				GetTree().ChangeSceneToFile("res://Scenes/GambleScene.tscn");
+			
+			}else
+			{	
+				player.AddBankRoll(_actualBet * - 1);
+				GetTree().ChangeSceneToFile("res://Scenes/GambleScene.tscn");
+
+			}
+		}
 	}
 
 
 	public void OnNextButtonPressed()
 	{
-		if (_match.PlayerWins == 2 || _match.DealerWins == 2)
+		if (_match.playerWins == 2 || _match.dealerWins == 2)
 		{
 			StartMatch();
 			return;
@@ -97,13 +120,13 @@ public partial class MainGameManager : Node2D
 
 	private void UpdateUI()
 	{
-		int pScore = _match.CalculateScore(_match.PlayerHand, false);
-		int dScore = _match.CalculateScore(_match.DealerHand, false);
+		int pScore = _match.CalculateScore(_match.playerHand, false);
+		int dScore = _match.CalculateScore(_match.dealerHand, false);
 
 		UI.UpdateScores(pScore, dScore, false);
-		UI.UpdateEconomy(_bankRoll, _totalDebt, _actualBet, _match.PlayerWins);
-		UI.RenderHand(_match.PlayerHand, UI.PlayerHandContainer, true);
-		UI.RenderHand(_match.DealerHand, UI.DealerHandContainer, true);
+		UI.UpdateEconomy(_bankRoll, _totalDebt, _actualBet, _match.playerWins);
+		UI.RenderHand(_match.playerHand, UI.PlayerHandContainer, true);
+		UI.RenderHand(_match.dealerHand, UI.DealerHandContainer, true);
 	}
 
 
