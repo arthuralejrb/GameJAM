@@ -120,6 +120,7 @@ offset_bottom = 517.0
 text = "TRASH"
 
 [node name="NextRoundButton" type="Button" parent="MainUI/ButtonsControl" unique_id=1070100908]
+visible = false
 layout_mode = 0
 offset_left = 514.0
 offset_top = 300.0

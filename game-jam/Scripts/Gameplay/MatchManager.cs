@@ -5,46 +5,56 @@ namespace GameJAM.Scripts.Gameplay
 	public class MatchManager
 	{
 		private Deck _deck = new Deck();
-		public List<Card> PlayerHand { get; private set; } = new List<Card>();
-		public List<Card> DealerHand { get; private set; } = new List<Card>();
+		public List<Card> playerHand { get; private set; } = new List<Card>();
+		public List<Card> dealerHand { get; private set; } = new List<Card>();
 		
-		public int PlayerWins { get; set; } = 0;
-		public int DealerWins { get; set; } = 0;
+		public int playerWins { get; set; } = 0;
+		public int dealerWins { get; set; } = 0;
+		public int totalRounds {get; set;} = 0;
+
 
 		public void StartMatch(double trapChance)
 		{
-			PlayerWins = 0;
-			DealerWins = 0;
+			playerWins = 0;
+			dealerWins = 0;
 			_deck.CreateDeck(trapChance);
 			StartRound(trapChance);
 		}
 
+
 		public void StartRound(double trapChance)
 		{
-			PlayerHand.Clear();
-			DealerHand.Clear();
 
-			PlayerHand.Add(_deck.DrawCard(trapChance));
-			PlayerHand.Add(_deck.DrawCard(trapChance));
-			DealerHand.Add(_deck.DrawCard(trapChance));
+			playerHand.Clear();
+			dealerHand.Clear();
+
+			playerHand.Add(_deck.DrawCard(trapChance));
+			playerHand.Add(_deck.DrawCard(trapChance));
+			dealerHand.Add(_deck.DealerDraw(trapChance));
+		
 		}
+
 
 		public void Hit(double trapChance)
 		{
-			PlayerHand.Add(_deck.DrawCard(trapChance));
+			playerHand.Add(_deck.DrawCard(trapChance));
+			
 		}
+
 
 		public void DealerTurn(double trapChance)
 		{
-			int playerScore = CalculateScore(PlayerHand, true);
-			int dealerScore = CalculateScore(DealerHand, true);
+			int playerScore = CalculateScore(playerHand, true);
+			int dealerScore = CalculateScore(dealerHand, true);
 
 			while (dealerScore < 17 && dealerScore < playerScore && playerScore <= 21)
 			{
-				DealerHand.Add(_deck.DrawCard(trapChance));
-				dealerScore = CalculateScore(DealerHand, true);
+				dealerHand.Add(_deck.DealerDraw(trapChance));
+				dealerScore = CalculateScore(dealerHand, true);
 			}
+
 		}
+
 
 		public int CalculateScore(List<Card> hand, bool useRealValue)
 		{
