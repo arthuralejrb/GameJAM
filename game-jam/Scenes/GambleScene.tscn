@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://dq3g6khqfngqg"]
+
+[ext_resource type="Script" uid="uid://bd40v7h31sgu0" path="res://Scripts/Gameplay/GambleScene.cs" id="1_j4pfr"]
+
+[node name="GambleScene" type="Node2D" unique_id=437956893 node_paths=PackedStringArray("TotalDebtLabel", "TotalBankRollLabel", "ActualBetLabel")]
+script = ExtResource("1_j4pfr")
+TotalDebtLabel = NodePath("PlayerStatusControl/TotalDebtLabel")
+TotalBankRollLabel = NodePath("PlayerStatusControl/ActualBankRollLabel")
+ActualBetLabel = NodePath("BetControl/AcualBetLabel")
+
+[node name="PlayerStatusControl" type="Control" parent="." unique_id=1353467228]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TotalDebtLabel" type="Label" parent="PlayerStatusControl" unique_id=374260373]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 8.0
+offset_right = 600.0
+offset_bottom = 31.0
+text = "Total debt: "
+
+[node name="ActualBankRollLabel" type="Label" parent="PlayerStatusControl" unique_id=671772506]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 40.0
+offset_right = 586.0
+offset_bottom = 63.0
+text = "Bankroll: "
+
+[node name="BetControl" type="Control" parent="." unique_id=1094796070]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AcualBetLabel" type="Label" parent="BetControl" unique_id=196075554]
+layout_mode = 0
+offset_left = 544.0
+offset_top = 232.0
+offset_right = 584.0
+offset_bottom = 255.0
+text = "BET:"
+
+[node name="AllInButton" type="Button" parent="BetControl" unique_id=1944882695]
+layout_mode = 0
+offset_left = 704.0
+offset_top = 304.0
+offset_right = 744.0
+offset_bottom = 335.0
+text = "ALL"
+
+[node name="MinimalBetButton" type="Button" parent="BetControl" unique_id=1291051939]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 304.0
+offset_right = 464.0
+offset_bottom = 335.0
+text = "MINIMAL
+"
+
+[node name="Plus50Button" type="Button" parent="BetControl" unique_id=763002023]
+layout_mode = 0
+offset_left = 584.0
+offset_top = 304.0
+offset_right = 624.0
+offset_bottom = 335.0
+text = "+50"
+
+[node name="Plus100Button" type="Button" parent="BetControl" unique_id=2097117278]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 304.0
+offset_right = 688.0
+offset_bottom = 335.0
+text = "+100"
+
+[node name="Minus50Button" type="Button" parent="BetControl" unique_id=2007039124]
+layout_mode = 0
+offset_left = 536.0
+offset_top = 304.0
+offset_right = 568.0
+offset_bottom = 335.0
+text = "-50"
+
+[node name="Minus100Button" type="Button" parent="BetControl" unique_id=562518465]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 304.0
+offset_right = 521.0
+offset_bottom = 335.0
+text = "-100"
+
+[node name="ConfirmButton" type="Button" parent="." unique_id=2043935051]
+offset_left = 664.0
+offset_top = 448.0
+offset_right = 746.0
+offset_bottom = 479.0
+text = "CONFIRM"
+
+[node name="BarButton" type="Button" parent="." unique_id=39358722]
+offset_left = 384.0
+offset_top = 448.0
+offset_right = 512.0
+offset_bottom = 479.0
+text = "GO TO THE BAR"
+
+[node name="MenuButton" type="Button" parent="." unique_id=428333807]
+offset_left = 72.0
+offset_top = 608.0
+offset_right = 125.0
+offset_bottom = 639.0
+text = "menu"
+
+[connection signal="pressed" from="BetControl/AllInButton" to="." method="OnAllInPressed"]
+[connection signal="pressed" from="BetControl/MinimalBetButton" to="." method="OnMinimalPressed"]
+[connection signal="pressed" from="BetControl/Plus50Button" to="." method="OnPlus50Pressed"]
+[connection signal="pressed" from="BetControl/Plus100Button" to="." method="OnPlus100Pressed"]
+[connection signal="pressed" from="BetControl/Minus50Button" to="." method="OnMinus50Pressed"]
+[connection signal="pressed" from="BetControl/Minus100Button" to="." method="OnMinus100Pressed"]
+[connection signal="pressed" from="ConfirmButton" to="." method="OnConfirmButtonPressed"]
+[connection signal="pressed" from="MenuButton" to="." method="OnMenuButtonPressed"]
