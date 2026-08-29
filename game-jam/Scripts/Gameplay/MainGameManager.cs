@@ -80,29 +80,26 @@ public partial class MainGameManager : Node2D
 		UI.RenderHand(_match.dealerHand, UI.DealerHandContainer, false);
 
 		_match.totalRounds++;
-	
-		if(_match.playerWins != 2 && _match.dealerWins != 2)
-		{
-			UI.ShowNextButton(true);
-				
-		}else
+
+		// Processa a recompensa/punição no singleton Player se a MD3 acabou
+		if (_match.playerWins == 2 || _match.dealerWins == 2)
 		{
 			var player = GetNode<Player>("/root/Player");
-			if(player == null) return;
-
-
-			if(_match.playerWins > _match.dealerWins)
-			{	
-				player.AddBankRoll(_actualBet * 2);
-				GetTree().ChangeSceneToFile("res://Scenes/GambleScene.tscn");
-			
-			}else
-			{	
-				player.AddBankRoll(_actualBet * - 1);
-				GetTree().ChangeSceneToFile("res://Scenes/GambleScene.tscn");
-
+			if (player != null)
+			{
+				if (_match.playerWins > _match.dealerWins)
+				{
+					player.AddBankRoll(_actualBet * 2);
+				}
+				else
+				{
+					player.AddBankRoll(_actualBet * -1);
+				}
 			}
 		}
+
+		// SEMPRE exibe o botão NEXT (com o overlay escuro) para o jogador ler o resultado final com calma!
+		UI.ShowNextButton(true);
 	}
 
 
@@ -110,7 +107,7 @@ public partial class MainGameManager : Node2D
 	{
 		if (_match.playerWins == 2 || _match.dealerWins == 2)
 		{
-			StartMatch();
+			GetTree().ChangeSceneToFile("res://Scenes/GambleScene.tscn");
 			return;
 		}
 
@@ -134,7 +131,7 @@ public partial class MainGameManager : Node2D
 	{
 		// calcula o limiar de dificuldade com base em quão proximo o jogador está de quitar a divida
 		double paymentLeft = _bankRoll / _totalDebt;
-		double difficultyThreshhold = 0.0;
+		double difficultyThreshhold = 0.1;
 
 		if(paymentLeft >= 0.75) difficultyThreshhold = 0.3;
 		if(paymentLeft >= 0.25 && paymentLeft < 0.75) difficultyThreshhold = 0.2;

@@ -24,58 +24,29 @@ public partial class UIManager : CanvasLayer
 	[Export] public Button ResumeButton;
 	[Export] public Button	OptionsButton;
 	[Export] public Button QuitButton;
-	
+	 
+	[Export] public ColorRect OverlayDimmer;
+	[Export] public Button NextButton;
+
 	private const string _overlayPath = "res://Scenes/OptionsMenuScene.tscn"; 
 
-	public override void _UnhandledInput(InputEvent @event)
+
+	public void UpdateScores(int playerScore, int dealerScore, bool hideSecretValues)
 	{
-		if (@event.IsActionPressed("ui_cancel"))
+		if (PlayerScoreLabel != null)
 		{
-			TogglePause();
-			GetViewport().SetInputAsHandled();
-
-		}
-	}
-
-
-	public void TogglePause()
-	{
-	
-		PauseMenuControl.Visible = !PauseMenuControl.Visible;
-		GetTree().Paused = PauseMenuControl.Visible;
-	
-	}
-
-
-	public void OnResumeButtonPressed()
-	{
-		TogglePause();
-
-	}
-
-	
-	public void OnOptionsButtonPressed()
-	{
-		ShowOverlay();
+			// Exibe apenas o número limpo (ex: "18" ou "PLAYER: 18")
+			PlayerScoreLabel.Text = $"{playerScore}";
 		
+		}
+
+		if (DealerScoreLabel != null)
+		{
+			DealerScoreLabel.Text = $"{dealerScore}";
+		
+		}
+
 	}
-
-
-	public void OnQuitButtonPressed()
-	{
-		GetTree().Paused = false;
-		GetTree().ChangeSceneToFile("res://Scenes/MainMenuScene.tscn");
-
-	}
-
-
-	public void UpdateScores(int playerScore, int dealerScore, bool isReal = false)
-	{
-		string prefix = isReal ? "REAL: " : "";
-		PlayerScoreLabel.Text = $"Player Score {prefix}{playerScore}";
-		DealerScoreLabel.Text = $"Dealer Score {prefix}{dealerScore}";
-	}
-
 
 	public void UpdateEconomy(int bankroll, int debt, int bet, int wins, string message = "")
 	{
@@ -98,13 +69,18 @@ public partial class UIManager : CanvasLayer
 	}
 
 
+
 	public void ShowNextButton(bool show)
 	{
-		if (NextRoundButton != null)
+		if (NextButton != null)
 		{
-			NextRoundButton.Visible = show;
-			NextRoundButton.Disabled = !show;
-	
+			NextButton.Visible = show;
+		}
+
+		if (OverlayDimmer != null)
+		{
+			// Ativa/desativa a tela escura quando o botão NEXT aparece/some
+			OverlayDimmer.Visible = show;
 		}
 	}
 
@@ -123,37 +99,36 @@ public partial class UIManager : CanvasLayer
 	}
 
 
+	// Arraste a cena CardView.tscn para este campo no Inspector do MainUI!
+	[Export] public PackedScene CardScene;
+
 	public void RenderHand(List<Card> hand, HBoxContainer container, bool hideSecretValues)
 	{
+		if (container == null || CardScene == null) return;
+
+		// Limpa a mão antiga
 		foreach (Node child in container.GetChildren())
 		{
 			child.QueueFree();
 		}
 
+		// Calcula a separação dinâmica: quanto mais cartas, mais elas se sobrepõem
+		int baseSeparation = -40; // Espaçamento padrão para 2 ou 3 cartas
+		if (hand.Count > 3)
+		{
+			// Reduz ainda mais a separação para compensar o número de cartas (ex: -60, -80...)
+			baseSeparation = -40 - ((hand.Count - 3) * 15);
+		}
+
+		// Aplica o novo espaçamento no container
+		container.AddThemeConstantOverride("separation", baseSeparation);
+
+		// Instancia as cartas
 		foreach (Card card in hand)
 		{
-			TextureRect cardSprite = new TextureRect();
-			cardSprite.ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize;
-			cardSprite.CustomMinimumSize = new Vector2(100, 140);
-			cardSprite.StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered;
-
-			string valToLoad = hideSecretValues ? card.visibleValue.ToString() : card.realValue.ToString();
-			string spritePath = $"res://Assets/Cartas/{card.cardSuit}/{valToLoad}.png";
-
-			if (ResourceLoader.Exists(spritePath))
-			{
-				cardSprite.Texture = GD.Load<Texture2D>(spritePath);
-			}
-
-			if (!hideSecretValues && card.cardType == CardType.Illusory)
-			{
-				Label trapTag = new Label();
-				trapTag.Text = $"REAL: {card.realValue}";
-				trapTag.AddThemeColorOverride("font_color", Colors.Red);
-				cardSprite.AddChild(trapTag);
-			}
-
-			container.AddChild(cardSprite);
+			CardView cardInstance = CardScene.Instantiate<CardView>();
+			container.AddChild(cardInstance);
+			cardInstance.SetupCard(card, hideSecretValues);
 		}
 	}
 }
