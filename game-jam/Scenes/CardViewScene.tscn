@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://btn1t8d6r5ava"]
+
+[ext_resource type="Script" uid="uid://be2adnuh8d2o7" path="res://Scripts/Gameplay/CardView.cs" id="1_3gre5"]
+
+[node name="CardView" type="Control" unique_id=1748803471 node_paths=PackedStringArray("CardSprite", "TrapOverlay")]
+custom_minimum_size = Vector2(192, 270)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3gre5")
+CardSprite = NodePath("CardSpriteTextureRect")
+TrapOverlay = NodePath("TrapOverlayTextureRect")
+
+[node name="CardSpriteTextureRect" type="TextureRect" parent="." unique_id=719316728]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TrapOverlayTextureRect" type="TextureRect" parent="." unique_id=1390088004]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RealValueLabel" type="Label" parent="." unique_id=363410500]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

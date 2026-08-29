@@ -1,56 +1,96 @@
 [gd_scene format=3 uid="uid://cia4p16rnyjd1"]
 
 [ext_resource type="Script" uid="uid://fqg5p6ain47l" path="res://Scripts/Ui/MainMenu.gd" id="1_sb72h"]
+[ext_resource type="Texture2D" uid="uid://b4m3cu5n5puvv" path="res://Assets/scene/background.png" id="2_47sjk"]
+[ext_resource type="Texture2D" uid="uid://doywxef8m8772" path="res://Assets/Ui/menu.png" id="3_gmxq7"]
+[ext_resource type="Texture2D" uid="uid://scbacuypnkk4" path="res://Assets/Ui/button1.png" id="4_c7qge"]
+[ext_resource type="Texture2D" uid="uid://crdfevur82ox1" path="res://Assets/logo do jogo.png" id="4_x260n"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x6js8"]
+texture = ExtResource("4_c7qge")
+region_rect = Rect2(7.543518, 22.959518, 84.54538, 43.329956)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lg2j6"]
+texture = ExtResource("4_c7qge")
+region_rect = Rect2(8.107162, 22.230288, 83.7872, 45.48448)
 
 [node name="Menu Principal" type="Node2D" unique_id=2029866759]
 script = ExtResource("1_sb72h")
 
-[node name="button_manager" type="Control" parent="." unique_id=652410115]
+[node name="BackgroundSprite2D" type="Sprite2D" parent="." unique_id=2115091798]
+position = Vector2(576, 324)
+scale = Vector2(2.9, 2.9)
+texture = ExtResource("2_47sjk")
+
+[node name="BackgroundOverlayColorRect" type="ColorRect" parent="." unique_id=1737033092]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0.5764706)
+
+[node name="ButtonManager" type="Control" parent="." unique_id=652410115]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-metadata/_edit_use_anchors_ = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Start" type="Button" parent="button_manager" unique_id=672894720]
+[node name="MenuPanelTextureRect" type="TextureRect" parent="ButtonManager" unique_id=11644932]
+texture_filter = 1
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 7.025
-anchor_top = 7.05
-anchor_right = 7.025
-anchor_bottom = 7.05
-offset_top = -101.0
-offset_right = 322.0
-offset_bottom = -37.0
-text = "Start"
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 328.0
+offset_top = 208.0
+offset_right = 828.0
+offset_bottom = 608.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_gmxq7")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ButtonManager/MenuPanelTextureRect" unique_id=1949826986]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 48.0
+offset_right = 320.0
+offset_bottom = 244.22858
+theme_override_constants/separation = 20
+
+[node name="Start" type="Button" parent="ButtonManager/MenuPanelTextureRect/VBoxContainer" unique_id=672894720]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
+text = "START"
 metadata/_edit_use_anchors_ = true
 
-[node name="Options" type="Button" parent="button_manager" unique_id=938326591]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 7.05
-anchor_top = 4.725
-anchor_right = 7.05
-anchor_bottom = 4.725
-offset_top = 72.0
-offset_right = 322.0
-offset_bottom = 136.0
-text = "Options"
+[node name="Options" type="Button" parent="ButtonManager/MenuPanelTextureRect/VBoxContainer" unique_id=938326591]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
+text = "OPTIONS"
 metadata/_edit_use_anchors_ = true
 
-[node name="Quit" type="Button" parent="button_manager" unique_id=635209033]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 7.05
-anchor_top = 8.925
-anchor_right = 7.05
-anchor_bottom = 8.925
-offset_top = -17.0
-offset_right = 322.0
-offset_bottom = 47.0
-text = "Quit"
+[node name="Quit" type="Button" parent="ButtonManager/MenuPanelTextureRect/VBoxContainer" unique_id=635209033]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
+text = "QUIT"
 metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="button_manager/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="button_manager/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="button_manager/Quit" to="." method="_on_quit_pressed"]
+[node name="LogoTextureRect" type="TextureRect" parent="ButtonManager/MenuPanelTextureRect" unique_id=1468523693]
+texture_filter = 1
+layout_mode = 0
+offset_left = 152.0
+offset_top = -128.0
+offset_right = 347.7895
+offset_bottom = -4.0
+texture = ExtResource("4_x260n")
+stretch_mode = 5
+
+[connection signal="pressed" from="ButtonManager/MenuPanelTextureRect/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="ButtonManager/MenuPanelTextureRect/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="ButtonManager/MenuPanelTextureRect/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

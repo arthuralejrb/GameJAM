@@ -1,16 +1,39 @@
 [gd_scene format=3 uid="uid://k8ykbp3hdrmx"]
 
+[ext_resource type="Texture2D" uid="uid://doywxef8m8772" path="res://Assets/Ui/menu.png" id="1_f1b24"]
 [ext_resource type="PackedScene" uid="uid://yei1irdal0fl" path="res://Scenes/VolumeSliderScene.tscn" id="1_kftxf"]
 [ext_resource type="Script" uid="uid://dkfvp2q8rdpxx" path="res://Scripts/Ui/back_button.gd" id="2_663nc"]
 [ext_resource type="Script" uid="uid://chne8d3fkm2jb" path="res://Scripts/Ui/fullscreen.gd" id="2_hvj8k"]
+[ext_resource type="Texture2D" uid="uid://scbacuypnkk4" path="res://Assets/Ui/button1.png" id="5_33ur0"]
+[ext_resource type="Texture2D" uid="uid://b4m3cu5n5puvv" path="res://Assets/scene/background.png" id="6_wr7e8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nvrue"]
+texture = ExtResource("1_f1b24")
+region_rect = Rect2(121, 0, 158, 300)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_561dh"]
+texture = ExtResource("5_33ur0")
+region_rect = Rect2(9, 24, 83, 43)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lg2j6"]
+texture = ExtResource("5_33ur0")
+region_rect = Rect2(8.107162, 22.230288, 83.7872, 45.48448)
 
 [node name="Options" type="Node2D" unique_id=1169768814]
+z_index = 11
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1447462158]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0.5764706)
 
 [node name="options_box" type="Panel" parent="." unique_id=58096485]
-offset_left = 193.0
+texture_filter = 1
+offset_left = 576.0
 offset_top = 56.0
-offset_right = 718.0
+offset_right = 1101.0
 offset_bottom = 553.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_nvrue")
 
 [node name="audio" type="Label" parent="options_box" unique_id=1934384375]
 layout_mode = 0
@@ -85,9 +108,17 @@ script = ExtResource("2_663nc")
 layout_mode = 0
 offset_left = 6.0
 offset_top = 6.0
-offset_right = 37.0
-offset_bottom = 38.476192
+offset_right = 56.0
+offset_bottom = 58.380955
+theme_override_styles/normal = SubResource("StyleBoxTexture_561dh")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
 text = "<"
+
+[node name="BackgroundSprite2D" type="Sprite2D" parent="." unique_id=63252246]
+z_index = -1
+position = Vector2(576, 324)
+scale = Vector2(2.9, 2.9)
+texture = ExtResource("6_wr7e8")
 
 [connection signal="toggled" from="options_box/Fullscreen" to="options_box/Fullscreen" method="_on_toggled"]
 [connection signal="pressed" from="back_button/back_button" to="back_button" method="_on_button_pressed"]
