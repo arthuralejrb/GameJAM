@@ -1,12 +1,42 @@
 [gd_scene format=3 uid="uid://dq3g6khqfngqg"]
 
 [ext_resource type="Script" uid="uid://bd40v7h31sgu0" path="res://Scripts/Gameplay/GambleScene.cs" id="1_j4pfr"]
+[ext_resource type="Texture2D" uid="uid://b4m3cu5n5puvv" path="res://Assets/scene/background.png" id="2_oh1ac"]
+[ext_resource type="Texture2D" uid="uid://b4nx53lujdubw" path="res://Assets/Ui/contadores.png" id="3_e1kfg"]
+[ext_resource type="Texture2D" uid="uid://scbacuypnkk4" path="res://Assets/Ui/button1.png" id="3_ma5o1"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x6js8"]
+texture = ExtResource("3_ma5o1")
+region_rect = Rect2(7.543518, 22.959518, 84.54538, 43.329956)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lg2j6"]
+texture = ExtResource("3_ma5o1")
+region_rect = Rect2(8.107162, 22.230288, 83.7872, 45.48448)
 
 [node name="GambleScene" type="Node2D" unique_id=437956893 node_paths=PackedStringArray("TotalDebtLabel", "TotalBankRollLabel", "ActualBetLabel")]
 script = ExtResource("1_j4pfr")
 TotalDebtLabel = NodePath("PlayerStatusControl/TotalDebtLabel")
 TotalBankRollLabel = NodePath("PlayerStatusControl/ActualBankRollLabel")
 ActualBetLabel = NodePath("BetControl/AcualBetLabel")
+
+[node name="BackgroundSprite2D" type="Sprite2D" parent="." unique_id=1419058778]
+position = Vector2(576, 324)
+scale = Vector2(2.9, 2.9)
+texture = ExtResource("2_oh1ac")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=596147622]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0.5764706)
+
+[node name="ScoreCounterTextureRect" type="TextureRect" parent="." unique_id=1488857919]
+texture_filter = 1
+offset_left = 416.0
+offset_top = 136.0
+offset_right = 644.772
+offset_bottom = 299.0
+texture = ExtResource("3_e1kfg")
+expand_mode = 1
 
 [node name="PlayerStatusControl" type="Control" parent="." unique_id=1353467228]
 layout_mode = 3
@@ -16,19 +46,23 @@ offset_bottom = 40.0
 
 [node name="TotalDebtLabel" type="Label" parent="PlayerStatusControl" unique_id=374260373]
 layout_mode = 0
-offset_left = 512.0
-offset_top = 8.0
-offset_right = 600.0
-offset_bottom = 31.0
+offset_left = 464.0
+offset_top = 168.0
+offset_right = 552.0
+offset_bottom = 191.0
+theme_override_colors/font_color = Color(0.7536477, 0.048249833, 0, 1)
+theme_override_font_sizes/font_size = 14
 text = "Total debt: "
 
 [node name="ActualBankRollLabel" type="Label" parent="PlayerStatusControl" unique_id=671772506]
 layout_mode = 0
-offset_left = 512.0
-offset_top = 40.0
-offset_right = 586.0
-offset_bottom = 63.0
-text = "Bankroll: "
+offset_left = 464.0
+offset_top = 184.0
+offset_right = 546.0
+offset_bottom = 207.0
+theme_override_colors/font_color = Color(1.92523e-06, 0.6627277, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "BANKROLL: "
 
 [node name="BetControl" type="Control" parent="." unique_id=1094796070]
 layout_mode = 3
@@ -38,81 +72,110 @@ offset_bottom = 40.0
 
 [node name="AcualBetLabel" type="Label" parent="BetControl" unique_id=196075554]
 layout_mode = 0
-offset_left = 544.0
-offset_top = 232.0
-offset_right = 584.0
-offset_bottom = 255.0
+offset_left = 464.0
+offset_top = 240.0
+offset_right = 506.0
+offset_bottom = 268.0
+theme_override_colors/font_color = Color(0.7536477, 0.048249833, 0, 1)
+theme_override_font_sizes/font_size = 20
 text = "BET:"
 
 [node name="AllInButton" type="Button" parent="BetControl" unique_id=1944882695]
 layout_mode = 0
-offset_left = 704.0
+offset_left = 688.0
 offset_top = 304.0
-offset_right = 744.0
-offset_bottom = 335.0
-text = "ALL"
+offset_right = 784.0
+offset_bottom = 341.2
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
+text = "ALL IN"
 
 [node name="MinimalBetButton" type="Button" parent="BetControl" unique_id=1291051939]
 layout_mode = 0
-offset_left = 384.0
+offset_left = 320.0
 offset_top = 304.0
-offset_right = 464.0
-offset_bottom = 335.0
+offset_right = 416.0
+offset_bottom = 341.2
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
 text = "MINIMAL
 "
 
 [node name="Plus50Button" type="Button" parent="BetControl" unique_id=763002023]
 layout_mode = 0
-offset_left = 584.0
+offset_left = 552.0
 offset_top = 304.0
-offset_right = 624.0
-offset_bottom = 335.0
-text = "+50"
+offset_right = 600.0
+offset_bottom = 341.2
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
+text = "$+50"
 
 [node name="Plus100Button" type="Button" parent="BetControl" unique_id=2097117278]
 layout_mode = 0
-offset_left = 640.0
+offset_left = 616.0
 offset_top = 304.0
-offset_right = 688.0
-offset_bottom = 335.0
-text = "+100"
+offset_right = 672.0
+offset_bottom = 340.16666
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
+text = "$+100"
 
 [node name="Minus50Button" type="Button" parent="BetControl" unique_id=2007039124]
 layout_mode = 0
-offset_left = 536.0
+offset_left = 496.0
 offset_top = 304.0
-offset_right = 568.0
-offset_bottom = 335.0
-text = "-50"
+offset_right = 536.0
+offset_bottom = 341.57574
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
+text = "$-50"
 
 [node name="Minus100Button" type="Button" parent="BetControl" unique_id=562518465]
 layout_mode = 0
-offset_left = 480.0
+offset_left = 432.0
 offset_top = 304.0
-offset_right = 521.0
-offset_bottom = 335.0
-text = "-100"
+offset_right = 480.0
+offset_bottom = 340.2927
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
+text = "$-100"
 
 [node name="ConfirmButton" type="Button" parent="." unique_id=2043935051]
-offset_left = 664.0
-offset_top = 448.0
-offset_right = 746.0
-offset_bottom = 479.0
+offset_left = 488.0
+offset_top = 408.0
+offset_right = 624.0
+offset_bottom = 450.16003
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
 text = "CONFIRM"
 
 [node name="BarButton" type="Button" parent="." unique_id=39358722]
-offset_left = 384.0
-offset_top = 448.0
-offset_right = 512.0
-offset_bottom = 479.0
+offset_left = 480.0
+offset_top = 472.0
+offset_right = 632.0
+offset_bottom = 514.16003
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
 text = "GO TO THE BAR"
 
 [node name="MenuButton" type="Button" parent="." unique_id=428333807]
-offset_left = 72.0
-offset_top = 608.0
-offset_right = 125.0
-offset_bottom = 639.0
-text = "menu"
+offset_left = 488.0
+offset_top = 600.0
+offset_right = 624.0
+offset_bottom = 642.16003
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
+text = "MAIN MENU"
 
 [connection signal="pressed" from="BetControl/AllInButton" to="." method="OnAllInPressed"]
 [connection signal="pressed" from="BetControl/MinimalBetButton" to="." method="OnMinimalPressed"]

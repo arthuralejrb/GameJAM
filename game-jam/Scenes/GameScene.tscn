@@ -2,29 +2,109 @@
 
 [ext_resource type="Script" uid="uid://pdxlskeocrgp" path="res://Scripts/Gameplay/MainGameManager.cs" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://bdbxgvk13klb3" path="res://Scripts/Gameplay/UIManager.cs" id="2_8gbba"]
+[ext_resource type="Texture2D" uid="uid://b4m3cu5n5puvv" path="res://Assets/scene/background.png" id="3_3mbwn"]
+[ext_resource type="PackedScene" uid="uid://btn1t8d6r5ava" path="res://Scenes/CardViewScene.tscn" id="3_kilg5"]
+[ext_resource type="Texture2D" uid="uid://d3k5fif6k87pt" path="res://Assets/scene/table.png" id="4_jwv4s"]
+[ext_resource type="Texture2D" uid="uid://ca3ky6pvwod28" path="res://Assets/scene/dealer.png" id="4_lohlh"]
+[ext_resource type="Texture2D" uid="uid://c34ao6smyo2te" path="res://Assets/Ui/contract.png" id="7_lg2j6"]
+[ext_resource type="Texture2D" uid="uid://scbacuypnkk4" path="res://Assets/Ui/button1.png" id="7_x6js8"]
+[ext_resource type="Texture2D" uid="uid://b4nx53lujdubw" path="res://Assets/Ui/contadores.png" id="7_y30xb"]
+[ext_resource type="Script" uid="uid://bqlahkrwb4bhb" path="res://Scripts/Gameplay/PauseMenu.cs" id="10_6vvcf"]
+[ext_resource type="Texture2D" uid="uid://bngf645kk3q7y" path="res://Assets/Ui/menu de pausa.png" id="11_cr6v8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x6js8"]
+texture = ExtResource("7_x6js8")
+region_rect = Rect2(7.543518, 22.959518, 84.54538, 43.329956)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lg2j6"]
+texture = ExtResource("7_x6js8")
+region_rect = Rect2(8.107162, 22.230288, 83.7872, 45.48448)
 
 [node name="Main" type="Node2D" unique_id=1440761591 node_paths=PackedStringArray("UI")]
 script = ExtResource("1_jjgbg")
 UI = NodePath("MainUI")
 
-[node name="MainUI" type="CanvasLayer" parent="." unique_id=1879224061 node_paths=PackedStringArray("PlayerScoreLabel", "DealerScoreLabel", "BankRollLabel", "DebtLabel", "BetLabel", "ResultLabel", "HitButton", "StandButton", "TrashButton", "NextRoundButton", "PlayerHandContainer", "DealerHandContainer", "PauseMenuControl", "ResumeButton", "OptionsButton", "QuitButton")]
+[node name="BackgroundSprite2D" type="Sprite2D" parent="." unique_id=50596502]
+position = Vector2(576, 324)
+scale = Vector2(2.9, 2.9)
+texture = ExtResource("3_3mbwn")
+
+[node name="DealerSprite2D" type="Sprite2D" parent="." unique_id=884088692]
+position = Vector2(576, 360)
+scale = Vector2(2, 2)
+texture = ExtResource("4_lohlh")
+
+[node name="TableSprite2D" type="Sprite2D" parent="." unique_id=1890852607]
+position = Vector2(576, 352)
+scale = Vector2(2, 2)
+texture = ExtResource("4_jwv4s")
+
+[node name="MainUI" type="CanvasLayer" parent="." unique_id=1879224061 node_paths=PackedStringArray("PlayerScoreLabel", "DealerScoreLabel", "BankRollLabel", "DebtLabel", "BetLabel", "ResultLabel", "HitButton", "StandButton", "TrashButton", "NextRoundButton", "PlayerHandContainer", "DealerHandContainer", "PauseMenuControl", "ResumeButton", "OptionsButton", "QuitButton", "OverlayDimmer", "NextButton")]
 script = ExtResource("2_8gbba")
 PlayerScoreLabel = NodePath("ScoreControl/PlayerScoreLabel")
 DealerScoreLabel = NodePath("ScoreControl/DealerScoreLabel")
-BankRollLabel = NodePath("StatusControl/BankRollLabel")
-DebtLabel = NodePath("StatusControl/DebtLabel")
-BetLabel = NodePath("StatusControl/BetLabel")
-ResultLabel = NodePath("StatusControl/ResultLabel")
+BankRollLabel = NodePath("StatusControl/VBoxContainer/BankRollLabel")
+DebtLabel = NodePath("StatusControl/VBoxContainer/DebtLabel")
+BetLabel = NodePath("StatusControl/VBoxContainer/BetLabel")
+ResultLabel = NodePath("StatusControl/VBoxContainer/ResultLabel")
 HitButton = NodePath("ButtonsControl/HitButton")
 StandButton = NodePath("ButtonsControl/StandButton")
 TrashButton = NodePath("ButtonsControl/TrashButton")
-NextRoundButton = NodePath("ButtonsControl/NextRoundButton")
+NextRoundButton = NodePath("NextRoundButton")
 PlayerHandContainer = NodePath("PlayerHandContainer")
 DealerHandContainer = NodePath("DealerHandContainer")
 PauseMenuControl = NodePath("PauseMenuControl")
 ResumeButton = NodePath("PauseMenuControl/ResumeButton")
 OptionsButton = NodePath("PauseMenuControl/OptionsButton")
 QuitButton = NodePath("PauseMenuControl/QuitButton")
+OverlayDimmer = NodePath("OverlayDimmerColorRect")
+NextButton = NodePath("NextRoundButton")
+CardScene = ExtResource("3_kilg5")
+
+[node name="OverlayDimmerColorRect" type="ColorRect" parent="MainUI" unique_id=1404262093]
+visible = false
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5764706)
+
+[node name="NextRoundButton" type="Button" parent="MainUI" unique_id=1070100908]
+visible = false
+z_index = 2
+offset_left = 456.0
+offset_top = 328.0
+offset_right = 656.0
+offset_bottom = 395.0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
+text = "NEXT"
+
+[node name="PlayerHandContainer" type="HBoxContainer" parent="MainUI" unique_id=1662322512]
+offset_left = 224.0
+offset_top = 432.0
+offset_right = 872.0
+offset_bottom = 612.0
+theme_override_constants/separation = -50
+alignment = 1
+
+[node name="DealerHandContainer" type="HBoxContainer" parent="MainUI" unique_id=1318611910]
+offset_left = 360.0
+offset_top = -24.0
+offset_right = 760.0
+offset_bottom = 156.0
+theme_override_constants/separation = -50
+alignment = 1
+
+[node name="TrashSlot" type="HBoxContainer" parent="MainUI" unique_id=327615079]
+visible = false
+offset_left = -22.0
+offset_top = -33.0
+offset_right = 18.0
+offset_bottom = 7.0
 
 [node name="ScoreControl" type="Control" parent="MainUI" unique_id=1480492097]
 layout_mode = 3
@@ -32,6 +112,16 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 metadata/_edit_use_anchors_ = true
+
+[node name="ScoreCounterTextureRect" type="TextureRect" parent="MainUI/ScoreControl" unique_id=499587347]
+texture_filter = 1
+layout_mode = 0
+offset_left = 904.0
+offset_top = 336.0
+offset_right = 1144.0
+offset_bottom = 507.0
+texture = ExtResource("7_y30xb")
+expand_mode = 1
 
 [node name="PlayerScoreLabel" type="Label" parent="MainUI/ScoreControl" unique_id=868210630]
 layout_mode = 0
@@ -58,7 +148,8 @@ offset_right = 40.0
 offset_bottom = 40.0
 metadata/_edit_use_anchors_ = true
 
-[node name="BankRollLabel" type="Label" parent="MainUI/StatusControl" unique_id=1323755280]
+[node name="ContractBackgroundTextureRec" type="TextureRect" parent="MainUI/StatusControl" unique_id=1154586843]
+texture_filter = 1
 layout_mode = 0
 offset_left = 152.0
 offset_top = 64.0
@@ -67,30 +158,39 @@ offset_bottom = 87.0
 text = "Bankroll:"
 metadata/_edit_use_anchors_ = true
 
-[node name="DebtLabel" type="Label" parent="MainUI/StatusControl" unique_id=1191794649]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainUI/StatusControl" unique_id=1215814184]
 layout_mode = 0
-offset_left = 156.0
-offset_top = 88.0
-offset_right = 241.0
-offset_bottom = 111.0
+offset_left = 8.0
+offset_top = 104.0
+offset_right = 105.0
+offset_bottom = 208.0
+alignment = 1
+
+[node name="BankRollLabel" type="Label" parent="MainUI/StatusControl/VBoxContainer" unique_id=1323755280]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4660228, 0, 0.14765838, 1)
+theme_override_font_sizes/font_size = 18
+text = "Bankroll:"
+
+[node name="DebtLabel" type="Label" parent="MainUI/StatusControl/VBoxContainer" unique_id=1191794649]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4660228, 0, 0.14765838, 1)
+theme_override_font_sizes/font_size = 18
 text = "Total Debt:"
 metadata/_edit_use_anchors_ = true
 
-[node name="BetLabel" type="Label" parent="MainUI/StatusControl" unique_id=1035791457]
-layout_mode = 0
-offset_left = 158.0
-offset_top = 109.0
-offset_right = 242.0
-offset_bottom = 132.0
+[node name="BetLabel" type="Label" parent="MainUI/StatusControl/VBoxContainer" unique_id=1035791457]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4660228, 0, 0.14765838, 1)
+theme_override_font_sizes/font_size = 18
 text = "Actual Bet:"
 metadata/_edit_use_anchors_ = true
 
-[node name="ResultLabel" type="Label" parent="MainUI/StatusControl" unique_id=920243943]
-layout_mode = 0
-offset_left = 904.0
-offset_top = 448.0
-offset_right = 1001.0
-offset_bottom = 471.0
+[node name="ResultLabel" type="Label" parent="MainUI/StatusControl/VBoxContainer" unique_id=920243943]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4660228, 0, 0.14765838, 1)
+theme_override_font_sizes/font_size = 18
 text = "Player wins: "
 metadata/_edit_use_anchors_ = true
 
@@ -104,20 +204,26 @@ metadata/_edit_use_anchors_ = true
 
 [node name="HitButton" type="Button" parent="MainUI/ButtonsControl" unique_id=1789558300]
 layout_mode = 0
-offset_left = 879.0
-offset_top = 584.0
-offset_right = 1019.0
-offset_bottom = 615.0
+offset_left = 951.0
+offset_top = 576.0
+offset_right = 1151.0
+offset_bottom = 643.0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
 text = "HIT
 "
 metadata/_edit_use_anchors_ = true
 
 [node name="StandButton" type="Button" parent="MainUI/ButtonsControl" unique_id=1412597914]
 layout_mode = 0
-offset_left = 881.0
-offset_top = 547.0
-offset_right = 1017.0
-offset_bottom = 578.0
+offset_left = 951.0
+offset_top = 504.0
+offset_right = 1151.0
+offset_bottom = 571.0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
 text = "STAND"
 metadata/_edit_use_anchors_ = true
 
@@ -129,46 +235,56 @@ offset_right = 1017.0
 offset_bottom = 533.0
 text = "TRASH"
 
-[node name="NextRoundButton" type="Button" parent="MainUI/ButtonsControl" unique_id=1070100908]
-visible = false
-layout_mode = 0
-offset_left = 514.0
-offset_top = 300.0
-offset_right = 599.0
-offset_bottom = 331.0
-text = "Next"
-
-[node name="PauseMenuControl" type="Control" parent="MainUI" unique_id=1229406176]
+[node name="PauseMenuControl" type="Control" parent="MainUI" unique_id=1229406176 node_paths=PackedStringArray("ResumeButton", "OptionsButton", "QuitButton")]
 process_mode = 3
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1151.0
 offset_bottom = 659.0
+script = ExtResource("10_6vvcf")
+ResumeButton = NodePath("ResumeButton")
+OptionsButton = NodePath("OptionsButton")
+QuitButton = NodePath("QuitButton")
+
+[node name="PauseOverlayColorRect" type="ColorRect" parent="MainUI/PauseMenuControl" unique_id=138568077]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PausePanelTextureRect" type="TextureRect" parent="MainUI/PauseMenuControl" unique_id=1768317170]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_cr6v8")
+expand_mode = 1
 
 [node name="ResumeButton" type="Button" parent="MainUI/PauseMenuControl" unique_id=587988499]
 layout_mode = 0
-offset_left = 600.0
+offset_left = 96.0
 offset_top = 232.0
-offset_right = 693.0
+offset_right = 384.0
 offset_bottom = 263.0
 text = "RESUME"
 
 [node name="OptionsButton" type="Button" parent="MainUI/PauseMenuControl" unique_id=424961114]
 layout_mode = 0
-offset_left = 504.0
-offset_top = 231.0
-offset_right = 574.0
-offset_bottom = 262.0
-text = "Options
-"
+offset_left = 88.0
+offset_top = 328.0
+offset_right = 376.0
+offset_bottom = 359.0
+text = "OPTIONS"
 
 [node name="QuitButton" type="Button" parent="MainUI/PauseMenuControl" unique_id=1692475061]
 layout_mode = 0
-offset_left = 360.0
-offset_top = 232.0
-offset_right = 464.0
-offset_bottom = 263.0
+offset_left = 112.0
+offset_top = 424.0
+offset_right = 400.0
+offset_bottom = 455.0
 text = "MAIN MENU
 "
 
