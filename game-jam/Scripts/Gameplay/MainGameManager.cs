@@ -54,8 +54,8 @@ public partial class MainGameManager : Node2D
 		UI.ToggleActionButtons(false);
 		_match.DealerTurn(_trapChance);
 
-		int playerScore = _match.CalculateScore(_match.playerHand, true);
-		int dealerScore = _match.CalculateScore(_match.dealerHand, true);
+		int playerScore = _match.CalculateScore(_match.playerHand, true, false);
+		int dealerScore = _match.CalculateScore(_match.dealerHand, true, false);
 
 		string roundMessage = "";
 		if (playerScore > 21)
@@ -120,8 +120,8 @@ public partial class MainGameManager : Node2D
 
 	private void UpdateUI()
 	{
-		int pScore = _match.CalculateScore(_match.playerHand, false);
-		int dScore = _match.CalculateScore(_match.dealerHand, false);
+		int pScore = _match.CalculateScore(_match.playerHand, false, false);
+		int dScore = _match.CalculateScore(_match.dealerHand, false, false);
 
 		UI.UpdateScores(pScore, dScore, false);
 		UI.UpdateEconomy(_bankRoll, _totalDebt, _actualBet, _match.playerWins);
@@ -154,6 +154,10 @@ public partial class MainGameManager : Node2D
 
 	}
 
+	public void UsarItem()
+	{
+		
+	}
 
 }
 }

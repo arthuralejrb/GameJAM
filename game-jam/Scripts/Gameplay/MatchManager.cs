@@ -44,20 +44,22 @@ namespace GameJAM.Scripts.Gameplay
 
 		public void DealerTurn(double trapChance)
 		{
-			int playerScore = CalculateScore(playerHand, true);
-			int dealerScore = CalculateScore(dealerHand, true);
+			int playerScore = CalculateScore(playerHand, true.false);
+			int dealerScore = CalculateScore(dealerHand, true,false);
 
 			while (dealerScore < 17 && dealerScore < playerScore && playerScore <= 21)
 			{
 				dealerHand.Add(_deck.DealerDraw(trapChance));
-				dealerScore = CalculateScore(dealerHand, true);
+				dealerScore = CalculateScore(dealerHand, true,false);
 			}
 
 		}
 
-
-		public int CalculateScore(List<Card> hand, bool useRealValue)
+		// Essa variavel UsouJoker n vai ser assim pra sempre, vai ser mais teste (por enquanto)
+		public int CalculateScore(List<Card> hand, bool useRealValue, bool UsouJoker)
 		{
+			if(UsouJoker) return 21;
+
 			int score = 0;
 			List<Card> aces = new List<Card>();
 

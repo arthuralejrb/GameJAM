@@ -19,9 +19,7 @@ namespace GameJAM.Scripts.Gameplay
 		this.realValue = realValue;
 		this.cardSuit = cardSuit;
 		this.cardType = cardType;
-
 	}
-
 }
 
 public class Deck
@@ -38,7 +36,7 @@ public class Deck
 		foreach (Suits suit in Enum.GetValues<Suits>())
 		{	
 			
-			for(int i = 1; i <= 13;i++)
+			for(int i = 1; i <= 13;i ++)
 			{
 				int realValue = i;
 				int visibleValue = realValue;
@@ -118,7 +116,6 @@ public class Deck
 
 		for(int i = 0; i < _deck.Count; i++)
 		{
-	
 			if(_deck[i].cardType == CardType.Normal) 
 			{
 				draw = _deck[i];
@@ -130,7 +127,6 @@ public class Deck
 		}
 		Shuffle();
 		return draw;
-
 	}
 
 
