@@ -43,7 +43,7 @@ public partial class MainGameManager : Node2D
 	}
 
 	public void OnHitButtonPressed()
-	{	
+	{
 		_match.Hit(_trapChance);
 		UpdateUI();
 	}
@@ -102,25 +102,6 @@ public partial class MainGameManager : Node2D
 		UI.ShowNextButton(true);
 	}
 
-	public void OnTrashButtonPressed()
-	{
-		// Se a trava estiver ativada, encerra o método
-		if (_match.hasDiscardedThisRound) return; 
-
-		Card cardToDiscard = UI.GetSelectedCard();
-
-		if (cardToDiscard != null)
-		{
-			_match.DiscardCard(cardToDiscard);
-			
-			// Ativa a trava para impedir novos descartes neste round
-			_match.hasDiscardedThisRound = true; 
-			
-			UI.ClearSelection();
-			UpdateUI(); 
-		}
-	}
-
 
 	public void OnNextButtonPressed()
 	{
@@ -143,9 +124,6 @@ public partial class MainGameManager : Node2D
 		UI.UpdateEconomy(_bankRoll, _totalDebt, _actualBet, _match.playerWins);
 		UI.RenderHand(_match.playerHand, UI.PlayerHandContainer, true);
 		UI.RenderHand(_match.dealerHand, UI.DealerHandContainer, true);
-		
-		// O botão liga e desliga automaticamente baseado no tamanho exato da mão neste frame
-		UI.HitButton.Disabled = _match.playerHand.Count >= _match.maxHandSize;
 	}
 
 
@@ -171,25 +149,6 @@ public partial class MainGameManager : Node2D
 
 		return difficultyThreshhold * difficultyMultiplier;
 
-	}
-
-	private bool CheckGameEndConditions(Player player)
-	{
-		// Atualiza a variável local com o saldo exato após a transação
-		_bankRoll = player.bankRoll;
-
-		if (_bankRoll >= _totalDebt)
-		{
-			GetTree().ChangeSceneToFile("res://Scenes/WinScene.tscn");
-			return true; 
-		}
-		else if (_bankRoll <= 0)
-		{
-			GetTree().ChangeSceneToFile("res://Scenes/LoseScene.tscn");
-			return true; 
-		}
-
-		return false;
 	}
 
 

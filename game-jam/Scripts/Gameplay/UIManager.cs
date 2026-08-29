@@ -131,39 +131,5 @@ public partial class UIManager : CanvasLayer
 			cardInstance.SetupCard(card, hideSecretValues);
 		}
 	}
-
-	private void OnCardSelected(Card cardData, TextureButton buttonNode)
-	{
-		// Se clicar na mesma carta que já está selecionada, desmarque-a
-		if (_selectedCardData == cardData)
-		{
-			buttonNode.Position = new Vector2(buttonNode.Position.X, buttonNode.Position.Y - _yOffset);
-			_selectedCardData = null;
-			_selectedCardButton = null;
-			return;
-		}
-
-		// Se havia uma carta diferente selecionada antes, desça ela de volta ao normal
-		if (_selectedCardButton != null)
-		{
-			_selectedCardButton.Position = new Vector2(_selectedCardButton.Position.X, _selectedCardButton.Position.Y - _yOffset);
-		}
-
-		// Marca a nova carta e faça ela subir
-		_selectedCardData = cardData;
-		_selectedCardButton = buttonNode;
-		buttonNode.Position = new Vector2(buttonNode.Position.X, buttonNode.Position.Y + _yOffset);
-	}
-
-	public Card GetSelectedCard()
-	{
-		return _selectedCardData;
-	}
-
-	public void ClearSelection()
-	{
-		_selectedCardData = null;
-		_selectedCardButton = null;
-	}
 }
 }
