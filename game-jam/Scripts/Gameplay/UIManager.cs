@@ -25,7 +25,11 @@ public partial class UIManager : CanvasLayer
 	[Export] public Button	OptionsButton;
 	[Export] public Button QuitButton;
 	
-	private const string _overlayPath = "res://Scenes/OptionsMenuScene.tscn"; 
+	private const string _overlayPath = "res://Scenes/OptionsMenuScene.tscn";
+
+	private Card _selectedCardData;
+	private TextureButton _selectedCardButton;
+	private readonly float _yOffset = -20f; // Quantos pixels a carta vai subir
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
@@ -132,29 +136,67 @@ public partial class UIManager : CanvasLayer
 
 		foreach (Card card in hand)
 		{
-			TextureRect cardSprite = new TextureRect();
-			cardSprite.ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize;
-			cardSprite.CustomMinimumSize = new Vector2(100, 140);
-			cardSprite.StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered;
+			TextureButton cardButton = new TextureButton();
+			cardButton.IgnoreTextureSize = true;
+			cardButton.CustomMinimumSize = new Vector2(100, 140);
+			cardButton.StretchMode = TextureButton.StretchModeEnum.KeepAspectCentered;
 
+			// As variáveis de caminho precisam ser declaradas antes de configurar a textura
 			string valToLoad = hideSecretValues ? card.visibleValue.ToString() : card.realValue.ToString();
 			string spritePath = $"res://Assets/Cartas/{card.cardSuit}/{valToLoad}.png";
 
 			if (ResourceLoader.Exists(spritePath))
 			{
-				cardSprite.Texture = GD.Load<Texture2D>(spritePath);
+				cardButton.TextureNormal = GD.Load<Texture2D>(spritePath);
 			}
+
+			// Injeção de dependência via lambda conectando o clique à carta específica
+			cardButton.Pressed += () => OnCardSelected(card, cardButton);
 
 			if (!hideSecretValues && card.cardType == CardType.Illusory)
 			{
 				Label trapTag = new Label();
 				trapTag.Text = $"REAL: {card.realValue}";
 				trapTag.AddThemeColorOverride("font_color", Colors.Red);
-				cardSprite.AddChild(trapTag);
+				cardButton.AddChild(trapTag);
 			}
 
-			container.AddChild(cardSprite);
+			container.AddChild(cardButton);
 		}
+	}
+
+	private void OnCardSelected(Card cardData, TextureButton buttonNode)
+	{
+		// Se clicar na mesma carta que já está selecionada, desmarque-a
+		if (_selectedCardData == cardData)
+		{
+			buttonNode.Position = new Vector2(buttonNode.Position.X, buttonNode.Position.Y - _yOffset);
+			_selectedCardData = null;
+			_selectedCardButton = null;
+			return;
+		}
+
+		// Se havia uma carta diferente selecionada antes, desça ela de volta ao normal
+		if (_selectedCardButton != null)
+		{
+			_selectedCardButton.Position = new Vector2(_selectedCardButton.Position.X, _selectedCardButton.Position.Y - _yOffset);
+		}
+
+		// Marca a nova carta e faça ela subir
+		_selectedCardData = cardData;
+		_selectedCardButton = buttonNode;
+		buttonNode.Position = new Vector2(buttonNode.Position.X, buttonNode.Position.Y + _yOffset);
+	}
+
+	public Card GetSelectedCard()
+	{
+		return _selectedCardData;
+	}
+
+	public void ClearSelection()
+	{
+		_selectedCardData = null;
+		_selectedCardButton = null;
 	}
 }
 }

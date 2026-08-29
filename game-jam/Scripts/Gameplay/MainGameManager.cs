@@ -104,6 +104,25 @@ public partial class MainGameManager : Node2D
 			}
 		}
 	}
+	
+	public void OnTrashButtonPressed()
+	{
+		// Resgata a carta que foi selecionada na interface
+		Card cardToDiscard = UI.GetSelectedCard();
+
+		// Verifica se o jogador realmente selecionou uma carta antes de clicar no lixo
+		if (cardToDiscard != null)
+		{
+			// Remove da mão e joga na pilha de descarte na memória
+			_match.DiscardCard(cardToDiscard);
+			
+			// Limpa a variável de seleção para evitar bugs no próximo turno
+			UI.ClearSelection();
+			
+			// Atualiza a interface
+			UpdateUI(); 
+		}
+	}
 
 
 	public void OnNextButtonPressed()

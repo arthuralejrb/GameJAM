@@ -7,6 +7,17 @@ namespace GameJAM.Scripts.Gameplay
 		private Deck _deck = new Deck();
 		public List<Card> playerHand { get; private set; } = new List<Card>();
 		public List<Card> dealerHand { get; private set; } = new List<Card>();
+
+		public Stack<Card> discardPile { get; private set; } = new Stack<Card>();
+
+		public void DiscardCard(Card cardToDiscard)
+		{
+			if (playerHand.Contains(cardToDiscard))
+			{
+				playerHand.Remove(cardToDiscard);
+				discardPile.Push(cardToDiscard);
+			}
+		}
 		
 		public int playerWins { get; set; } = 0;
 		public int dealerWins { get; set; } = 0;
@@ -27,6 +38,7 @@ namespace GameJAM.Scripts.Gameplay
 
 			playerHand.Clear();
 			dealerHand.Clear();
+			discardPile.Clear();
 
 			playerHand.Add(_deck.DrawCard(trapChance));
 			playerHand.Add(_deck.DrawCard(trapChance));
