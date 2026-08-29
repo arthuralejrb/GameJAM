@@ -43,7 +43,7 @@ public partial class MainGameManager : Node2D
 	}
 
 	public void OnHitButtonPressed()
-	{
+	{	
 		_match.Hit(_trapChance);
 		UpdateUI();
 	}
@@ -90,36 +90,40 @@ public partial class MainGameManager : Node2D
 			var player = GetNode<Player>("/root/Player");
 			if(player == null) return;
 
-
+			// Faz a matemática de adicionar ou subtrair o saldo
 			if(_match.playerWins > _match.dealerWins)
-			{	
+			{   
 				player.AddBankRoll(_actualBet * 2);
-				GetTree().ChangeSceneToFile("res://Scenes/GambleScene.tscn");
-			
-			}else
-			{	
+			}
+			else
+			{   
 				player.AddBankRoll(_actualBet * - 1);
-				GetTree().ChangeSceneToFile("res://Scenes/GambleScene.tscn");
+			}
 
+			// Passa pela barreira de verificação. 
+			// Falso, o jogo continua.
+			if (!CheckGameEndConditions(player))
+			{
+				GetTree().ChangeSceneToFile("res://Scenes/GambleScene.tscn");
 			}
 		}
 	}
-	
+
 	public void OnTrashButtonPressed()
 	{
-		// Resgata a carta que foi selecionada na interface
+		// Se a trava estiver ativada, encerra o método
+		if (_match.hasDiscardedThisRound) return; 
+
 		Card cardToDiscard = UI.GetSelectedCard();
 
-		// Verifica se o jogador realmente selecionou uma carta antes de clicar no lixo
 		if (cardToDiscard != null)
 		{
-			// Remove da mão e joga na pilha de descarte na memória
 			_match.DiscardCard(cardToDiscard);
 			
-			// Limpa a variável de seleção para evitar bugs no próximo turno
-			UI.ClearSelection();
+			// Ativa a trava para impedir novos descartes neste round
+			_match.hasDiscardedThisRound = true; 
 			
-			// Atualiza a interface
+			UI.ClearSelection();
 			UpdateUI(); 
 		}
 	}
@@ -146,6 +150,9 @@ public partial class MainGameManager : Node2D
 		UI.UpdateEconomy(_bankRoll, _totalDebt, _actualBet, _match.playerWins);
 		UI.RenderHand(_match.playerHand, UI.PlayerHandContainer, true);
 		UI.RenderHand(_match.dealerHand, UI.DealerHandContainer, true);
+		
+		// O botão liga e desliga automaticamente baseado no tamanho exato da mão neste frame
+		UI.HitButton.Disabled = _match.playerHand.Count >= _match.maxHandSize;
 	}
 
 
@@ -171,6 +178,25 @@ public partial class MainGameManager : Node2D
 
 		return difficultyThreshhold * difficultyMultiplier;
 
+	}
+
+	private bool CheckGameEndConditions(Player player)
+	{
+		// Atualiza a variável local com o saldo exato após a transação
+		_bankRoll = player.bankRoll;
+
+		if (_bankRoll >= _totalDebt)
+		{
+			GetTree().ChangeSceneToFile("res://Scenes/WinScene.tscn");
+			return true; 
+		}
+		else if (_bankRoll <= 0)
+		{
+			GetTree().ChangeSceneToFile("res://Scenes/LoseScene.tscn");
+			return true; 
+		}
+
+		return false;
 	}
 
 

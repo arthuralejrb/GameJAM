@@ -7,8 +7,15 @@ namespace GameJAM.Scripts.Gameplay
 		private Deck _deck = new Deck();
 		public List<Card> playerHand { get; private set; } = new List<Card>();
 		public List<Card> dealerHand { get; private set; } = new List<Card>();
-
 		public Stack<Card> discardPile { get; private set; } = new Stack<Card>();
+
+
+		
+		public bool hasDiscardedThisRound { get; set; } = false;
+		public int playerWins { get; set; } = 0;
+		public int dealerWins { get; set; } = 0;
+		public int totalRounds {get; set;} = 0;
+		public int maxHandSize = 5;
 
 		public void DiscardCard(Card cardToDiscard)
 		{
@@ -18,11 +25,6 @@ namespace GameJAM.Scripts.Gameplay
 				discardPile.Push(cardToDiscard);
 			}
 		}
-		
-		public int playerWins { get; set; } = 0;
-		public int dealerWins { get; set; } = 0;
-		public int totalRounds {get; set;} = 0;
-
 
 		public void StartMatch(double trapChance)
 		{
@@ -35,6 +37,8 @@ namespace GameJAM.Scripts.Gameplay
 
 		public void StartRound(double trapChance)
 		{
+			// Limpa a trava sempre que um novo round começar
+    		hasDiscardedThisRound = false;
 
 			playerHand.Clear();
 			dealerHand.Clear();
@@ -49,6 +53,8 @@ namespace GameJAM.Scripts.Gameplay
 
 		public void Hit(double trapChance)
 		{
+			if (playerHand.Count >= maxHandSize) return;
+			
 			playerHand.Add(_deck.DrawCard(trapChance));
 			
 		}
