@@ -18,23 +18,19 @@ namespace GameJAM.Scripts.Gameplay
 
 		}
 
-
-		// public void GameEnd()
-		// {
-		// 	if (bankRoll >= actualDebt)
-		// 	{
-		// 		GetTree().ChangeSceneToFile("res://Scenes/WinScene.tscn");
-				
-		// 	}else if(bankRoll <= 0)
-		// 	{
-		// 		GetTree().ChangeSceneToFile("res://Scenes/LoseScene.tscn");
-
-		// 	}else
-		// 	{
-		// 		return;
-		// 	}
-
-		// }
+		public void CheckGameEnd()
+		{
+			if (bankRoll >= actualDebt)
+			{
+				// Dívida paga, Transição para tela de vitória
+				GetTree().ChangeSceneToFile("res://Scenes/WinScene.tscn");
+			}
+			else if (bankRoll <= 0)
+			{
+				// Saldo zerado/negativo, Transição para tela de derrota
+				GetTree().ChangeSceneToFile("res://Scenes/LoseScene.tscn");
+			}
+		}
 
 	}
 
