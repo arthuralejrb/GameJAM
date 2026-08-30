@@ -46,13 +46,22 @@ namespace GameJAM.Scripts.Gameplay
 			_match.StartRound(_trapChance);
 			UI.ToggleActionButtons(true);
 			UI.ShowNextButton(false);
+
+			// Oculta o ResultLabel ao iniciar nova rodada
+			if (UI.ResultLabel != null)
+			{
+				UI.ResultLabel.Text = "";
+				UI.ResultLabel.Visible = false;
+			}
+
 			UpdateUI();
 		}
 
 		public void OnHitButtonPressed()
 		{
 			_match.Hit(_trapChance);
-			UpdateUI();
+			UpdateUI(); 
+
 		}
 
 		public void OnStandButtonPressed()
@@ -60,50 +69,41 @@ namespace GameJAM.Scripts.Gameplay
 			UI.ToggleActionButtons(false);
 			_match.DealerTurn(_trapChance);
 
-			int playerScore = _match.CalculateScore(_match.playerHand, true);
-			int dealerScore = _match.CalculateScore(_match.dealerHand, true);
+			int playerScore = _match.CalculateScore(_match.playerHand, true, _match.hasUsedJokerThisRound);
+			int dealerScore = _match.CalculateScore(_match.dealerHand, true, false);
 
 			string roundMessage = "";
+
 			if (playerScore > 21)
 			{
 				_match.dealerWins++;
-				roundMessage = "VOCÊ ESTOUROU! Derrota!";
+				roundMessage = "VOCÊ ESTOUROU!";
 			}
 			else if (dealerScore > 21 || playerScore > dealerScore)
 			{
 				_match.playerWins++;
-				roundMessage = "VOCÊ VENCEU A RODADA!";
+				roundMessage = "VOCÊ VENCEU!";
+			}
+			else if (dealerScore > playerScore)
+			{
+				_match.dealerWins++;
+				roundMessage = "DEALER VENCEU!";
 			}
 			else
 			{
-				_match.dealerWins++;
-				roundMessage = "O DEALER VENCEU!";
+				roundMessage = "EMPATE!";
 			}
 
+			// Atualiza os números finais das pontuações
 			UI.UpdateScores(playerScore, dealerScore, true);
+
+			// Envia a mensagem do resultado e TORNA O LABEL VISÍVEL só agora!
 			UI.UpdateEconomy(_bankRoll, _totalDebt, _actualBet, _match.playerWins, roundMessage);
+
 			UI.RenderHand(_match.playerHand, UI.PlayerHandContainer, false);
 			UI.RenderHand(_match.dealerHand, UI.DealerHandContainer, false);
 
 			_match.totalRounds++;
-
-			// Processa a premiação/punição ao fim da partida (MD3)
-			if (_match.playerWins == 2 || _match.dealerWins == 2)
-			{
-				var player = GetNode<Player>("/root/Player");
-				if (player != null)
-				{
-					if (_match.playerWins > _match.dealerWins)
-					{
-						player.AddBankRoll(_actualBet * 2);
-					}
-					else
-					{
-						player.AddBankRoll(_actualBet * -1);
-					}
-				}
-			}
-
 			UI.ShowNextButton(true);
 		}
 
@@ -155,21 +155,20 @@ namespace GameJAM.Scripts.Gameplay
 			int pScore = _match.CalculateScore(_match.playerHand, false, _match.hasUsedJokerThisRound);
 			int dScore = _match.CalculateScore(_match.dealerHand, false, false);
 
-			UI.UpdateScores(pScore, dScore, false);
-			UI.UpdateEconomy(_bankRoll, _totalDebt, _actualBet, _match.playerWins);
+			// Passamos 'true' para o score do Dealer ficar sempre visível
+			UI.UpdateScores(pScore, dScore, true);
+
+			UI.UpdateEconomy(_bankRoll, _totalDebt, _actualBet, _match.playerWins, "");
+
 			UI.RenderHand(_match.playerHand, UI.PlayerHandContainer, !_match.isPingaActive);
 			UI.RenderHand(_match.dealerHand, UI.DealerHandContainer, true);
 
-			// Desativa/ativa o botão HIT de acordo com o limite de mão
-			UI.HitButton.Disabled = _match.playerHand.Count >= _match.maxHandSize;
-
-			// Renderiza os itens que o jogador comprou no Bar
 			if (player != null)
 			{
 				UI.RenderInventory(player, (itemType) => {
 					if (player.UseItem(itemType, _match, UI))
 					{
-						UpdateUI(); // Consome o item do inventário e atualiza o estado do jogo
+						UpdateUI();
 					}
 				});
 			}

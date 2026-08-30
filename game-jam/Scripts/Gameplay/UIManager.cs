@@ -35,10 +35,19 @@ namespace GameJAM.Scripts.Gameplay
 		private CardView _selectedCardNode;
 		private readonly float _yOffset = -20f;
 
-		public void UpdateScores(int playerScore, int dealerScore, bool hideSecretValues)
+		// Procure por algo assim no UIManager.cs:
+		public void UpdateScores(int playerScore, int dealerScore, bool showDealerScore)
 		{
-			if (PlayerScoreLabel != null) PlayerScoreLabel.Text = $"{playerScore}";
-			if (DealerScoreLabel != null) DealerScoreLabel.Text = $"{dealerScore}";
+			if (PlayerScoreLabel != null)
+			{
+				PlayerScoreLabel.Text = playerScore.ToString();
+			}
+
+			if (DealerScoreLabel != null)
+			{
+				// Exibe o número do Dealer
+				DealerScoreLabel.Text = showDealerScore ? dealerScore.ToString() : "";
+			}
 		}
 
 		public void UpdateEconomy(int bankroll, int debt, int bet, int wins, string message = "")
@@ -46,13 +55,20 @@ namespace GameJAM.Scripts.Gameplay
 			if (BankRollLabel != null) BankRollLabel.Text = $"Bankroll: {bankroll}";
 			if (DebtLabel != null) DebtLabel.Text = $"Total Debt: {debt}";
 			if (BetLabel != null) BetLabel.Text = $"Actual Bet: {bet}";
-			
+
+			// Lida EXCLUSIVAMENTE com a mensagem de resultado (SEM "Wins: X")
 			if (ResultLabel != null)
 			{
-				if (string.IsNullOrEmpty(message))
-					ResultLabel.Text = $"Wins: {wins}";
+				if (!string.IsNullOrEmpty(message))
+				{
+					ResultLabel.Text = message;
+					ResultLabel.Visible = true;
+				}
 				else
-					ResultLabel.Text = $"{message} (Wins: {wins})";
+				{
+					ResultLabel.Text = "";
+					ResultLabel.Visible = false; // Mantém oculto durante a jogada!
+				}
 			}
 		}
 

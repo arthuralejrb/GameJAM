@@ -69,16 +69,19 @@ public class Deck
 			}
 
 		}
-
+		// Toca o som de embaralhar através do AudioManager
+		if (AudioManager.Instance != null && AudioManager.Instance.ShuffleSfx != null)
+		{
+			AudioManager.Instance.PlaySfx(AudioManager.Instance.ShuffleSfx);
+		}
 		Shuffle(); 
 	}
 
 	public void Shuffle()
-	{ // function to shuffle the deck
-
+	{
 		int n = _deck.Count - 1;
 
-		while( n > 1)
+		while (n > 1)
 		{
 			n--;
 			int k = _rng.Next(n + 1);
