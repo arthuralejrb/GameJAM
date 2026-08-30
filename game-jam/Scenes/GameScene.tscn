@@ -148,10 +148,10 @@ horizontal_alignment = 1
 
 [node name="DealerScoreLabel" type="Label" parent="MainUI/ScoreControl" unique_id=679636381]
 layout_mode = 0
-offset_left = 944.0
-offset_top = 368.0
-offset_right = 1112.0
-offset_bottom = 408.0
+offset_left = 950.0
+offset_top = 370.0
+offset_right = 1118.0
+offset_bottom = 410.0
 theme_override_colors/font_color = Color(0.712692, 2.9359758e-06, 5.7756904e-07, 1)
 theme_override_font_sizes/font_size = 26
 horizontal_alignment = 1
@@ -255,7 +255,6 @@ theme_override_constants/separation = 10
 
 [node name="PauseMenuControl" type="Control" parent="MainUI" unique_id=1229406176 node_paths=PackedStringArray("ResumeButton", "OptionsButton", "QuitButton")]
 process_mode = 3
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1151.0
@@ -267,13 +266,11 @@ OptionsButton = NodePath("OptionsButton")
 QuitButton = NodePath("QuitButton")
 
 [node name="PauseOverlayColorRect" type="ColorRect" parent="MainUI/PauseMenuControl" unique_id=138568077]
-visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="PausePanelTextureRect" type="TextureRect" parent="MainUI/PauseMenuControl" unique_id=1768317170]
-visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
