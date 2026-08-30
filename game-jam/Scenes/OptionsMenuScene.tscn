@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://k8ykbp3hdrmx"]
 
+[ext_resource type="Theme" uid="uid://b43qsp7hosvgg" path="res://Assets/Fonte/mainTheme.tres" id="1_33ur0"]
 [ext_resource type="Texture2D" uid="uid://doywxef8m8772" path="res://Assets/Ui/menu.png" id="1_f1b24"]
 [ext_resource type="PackedScene" uid="uid://yei1irdal0fl" path="res://Scenes/VolumeSliderScene.tscn" id="1_kftxf"]
 [ext_resource type="Script" uid="uid://dkfvp2q8rdpxx" path="res://Scripts/Ui/back_button.gd" id="2_663nc"]
@@ -33,6 +34,7 @@ offset_left = 576.0
 offset_top = 56.0
 offset_right = 1101.0
 offset_bottom = 553.0
+theme = ExtResource("1_33ur0")
 theme_override_styles/panel = SubResource("StyleBoxTexture_nvrue")
 
 [node name="audio" type="Label" parent="options_box" unique_id=1934384375]

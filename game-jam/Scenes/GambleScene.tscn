@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bd40v7h31sgu0" path="res://Scripts/Gameplay/GambleScene.cs" id="1_j4pfr"]
 [ext_resource type="Texture2D" uid="uid://b4m3cu5n5puvv" path="res://Assets/scene/background.png" id="2_oh1ac"]
 [ext_resource type="Texture2D" uid="uid://b4nx53lujdubw" path="res://Assets/Ui/contadores.png" id="3_e1kfg"]
+[ext_resource type="Theme" uid="uid://b43qsp7hosvgg" path="res://Assets/Fonte/mainTheme.tres" id="3_lbims"]
 [ext_resource type="Texture2D" uid="uid://scbacuypnkk4" path="res://Assets/Ui/button1.png" id="3_ma5o1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x6js8"]
@@ -43,6 +44,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("3_lbims")
 
 [node name="TotalDebtLabel" type="Label" parent="PlayerStatusControl" unique_id=374260373]
 layout_mode = 0
@@ -69,6 +71,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("3_lbims")
 
 [node name="AcualBetLabel" type="Label" parent="BetControl" unique_id=196075554]
 layout_mode = 0
@@ -152,6 +155,7 @@ offset_left = 488.0
 offset_top = 408.0
 offset_right = 624.0
 offset_bottom = 450.16003
+theme = ExtResource("3_lbims")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
 theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
@@ -162,6 +166,7 @@ offset_left = 480.0
 offset_top = 472.0
 offset_right = 632.0
 offset_bottom = 514.16003
+theme = ExtResource("3_lbims")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
 theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
@@ -172,6 +177,7 @@ offset_left = 488.0
 offset_top = 600.0
 offset_right = 624.0
 offset_bottom = 642.16003
+theme = ExtResource("3_lbims")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
 theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
