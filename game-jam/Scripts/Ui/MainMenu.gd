@@ -3,6 +3,9 @@ extends Node2D
 func _ready() -> void:
 	# Garante que o Player global existe
 	var player_node = get_node_or_null("/root/Player")
+	var audio = get_node_or_null("/root/AudioManager");
+	if (audio != null):
+		audio.PlayMusic(audio.MenuMusic)
 
 func _on_start_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/GambleScene.tscn")

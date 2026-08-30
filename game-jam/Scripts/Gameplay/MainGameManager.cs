@@ -14,6 +14,9 @@ namespace GameJAM.Scripts.Gameplay
 
 		public override void _Ready()
 		{
+			var audio = GetNode<AudioManager>("/root/AudioManager");
+			if (audio != null) audio.PlayMusic(audio.GameplayMusic);
+			
 			var player = GetNode<Player>("/root/Player");
 			if (player == null) return;
 			

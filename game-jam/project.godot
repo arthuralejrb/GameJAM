@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 [autoload]
 
 Player="*uid://876b33ya3fut"
+AudioManager="*uid://ccdimvyua8xjf"
 
 [display]
 

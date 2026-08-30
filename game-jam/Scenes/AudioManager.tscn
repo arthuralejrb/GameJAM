@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://ccdimvyua8xjf"]
+
+[ext_resource type="Script" uid="uid://dlo6fwawa7i3g" path="res://Scripts/Gameplay/AudioManager.cs" id="1_dygvs"]
+[ext_resource type="AudioStream" uid="uid://cexhnwpnmqi5i" path="res://Assets/SFX/Musicas/musicaMENU_PAUSE.mp3" id="2_yq78e"]
+[ext_resource type="AudioStream" uid="uid://bh8bt5s4ahcgu" path="res://Assets/SFX/Musicas/musicaAMBIENTE01.mp3" id="3_ncvnl"]
+[ext_resource type="AudioStream" uid="uid://bjphgmatbqojk" path="res://Assets/SFX/Musicas/musicaAMBIENTE02.mp3" id="4_x8qvj"]
+
+[node name="AudioManager" type="Node2D" unique_id=1173206326]
+script = ExtResource("1_dygvs")
+MenuMusic = ExtResource("2_yq78e")
+GambleBarMusic = ExtResource("3_ncvnl")
+GameplayMusic = ExtResource("4_x8qvj")

@@ -16,6 +16,8 @@ public partial class GambleScene : Node2D
 
 	public override void _Ready()
 	{ 
+		var audio = GetNode<AudioManager>("/root/AudioManager");
+		if (audio != null) audio.PlayMusic(audio.GambleBarMusic);
 		// pega o nó global do tipo player
 		_player = GetNode<Player>("/root/Player");
 
