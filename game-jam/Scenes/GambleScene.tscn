@@ -184,4 +184,5 @@ text = "MAIN MENU"
 [connection signal="pressed" from="BetControl/Minus50Button" to="." method="OnMinus50Pressed"]
 [connection signal="pressed" from="BetControl/Minus100Button" to="." method="OnMinus100Pressed"]
 [connection signal="pressed" from="ConfirmButton" to="." method="OnConfirmButtonPressed"]
+[connection signal="pressed" from="BarButton" to="." method="OnBarButtonPressed"]
 [connection signal="pressed" from="MenuButton" to="." method="OnMenuButtonPressed"]

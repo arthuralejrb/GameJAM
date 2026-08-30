@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv1g678oe7lq0"
-path="res://.godot/imported/button1.png-e1a11481d2c54b2b1be8865e50ee674a.ctex"
+uid="uid://bq5vmlpdu5135"
+path="res://.godot/imported/bar_loja.png-a2f72270f621d8792f718867f9d304db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/button1.png"
-dest_files=["res://.godot/imported/button1.png-e1a11481d2c54b2b1be8865e50ee674a.ctex"]
+source_file="res://Assets/scene/bar_loja.png"
+dest_files=["res://.godot/imported/bar_loja.png-a2f72270f621d8792f718867f9d304db.ctex"]
 
 [params]
 

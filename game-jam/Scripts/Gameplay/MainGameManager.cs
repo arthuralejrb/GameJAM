@@ -109,14 +109,18 @@ namespace GameJAM.Scripts.Gameplay
 
 		public void OnTrashButtonPressed()
 		{
-			if (_match.hasDiscardedThisRound) return;
+			var player = GetNode<Player>("/root/Player");
+			int maxDiscardsAllowed = 1 + (player != null ? player.extraDiscardSlots : 0);
+
+			// Bloqueia se estourar os descartes permitidos
+			if (_match.discardsUsedThisRound >= maxDiscardsAllowed) return;
 
 			Card cardToDiscard = UI.GetSelectedCard();
 
 			if (cardToDiscard != null)
 			{
 				_match.DiscardCard(cardToDiscard);
-				_match.hasDiscardedThisRound = true;
+				_match.discardsUsedThisRound++;
 				
 				UI.ClearSelection();
 				UpdateUI();
@@ -143,19 +147,34 @@ namespace GameJAM.Scripts.Gameplay
 			StartRound();
 		}
 
+		// Adicione ou confirme este trecho dentro de UpdateUI() no MainGameManager.cs:
 		private void UpdateUI()
 		{
-			int pScore = _match.CalculateScore(_match.playerHand, false);
-			int dScore = _match.CalculateScore(_match.dealerHand, false);
+			var player = GetNode<Player>("/root/Player");
+
+			int pScore = _match.CalculateScore(_match.playerHand, false, _match.hasUsedJokerThisRound);
+			int dScore = _match.CalculateScore(_match.dealerHand, false, false);
 
 			UI.UpdateScores(pScore, dScore, false);
 			UI.UpdateEconomy(_bankRoll, _totalDebt, _actualBet, _match.playerWins);
-			UI.RenderHand(_match.playerHand, UI.PlayerHandContainer, true);
+			UI.RenderHand(_match.playerHand, UI.PlayerHandContainer, !_match.isPingaActive);
 			UI.RenderHand(_match.dealerHand, UI.DealerHandContainer, true);
 
+			// Desativa/ativa o botão HIT de acordo com o limite de mão
 			UI.HitButton.Disabled = _match.playerHand.Count >= _match.maxHandSize;
-		}
 
+			// Renderiza os itens que o jogador comprou no Bar
+			if (player != null)
+			{
+				UI.RenderInventory(player, (itemType) => {
+					if (player.UseItem(itemType, _match, UI))
+					{
+						UpdateUI(); // Consome o item do inventário e atualiza o estado do jogo
+					}
+				});
+			}
+		}
+		
 		public double CalculateDifficulty()
 		{
 			double paymentLeft = (double)_bankRoll / _totalDebt;

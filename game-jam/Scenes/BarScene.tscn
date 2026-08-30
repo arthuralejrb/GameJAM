@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://fgll4yt6uc2c"]
+
+[ext_resource type="Script" uid="uid://cfi2jxdnb8ebi" path="res://Scripts/Gameplay/ShopManager.cs" id="1_pshnu"]
+[ext_resource type="Texture2D" uid="uid://bq5vmlpdu5135" path="res://Assets/scene/bar_loja.png" id="2_gr58c"]
+[ext_resource type="Texture2D" uid="uid://d1qri2qp0x13h" path="res://Assets/itens/cachaca.png" id="4_dqtjc"]
+[ext_resource type="Texture2D" uid="uid://baa0mys282si4" path="res://Assets/itens/joker.png" id="5_jiaay"]
+[ext_resource type="Texture2D" uid="uid://cbixoxq73vnfn" path="res://Assets/itens/bolso.png" id="6_c0ufy"]
+[ext_resource type="Texture2D" uid="uid://ds2k14xgfufl8" path="res://Assets/itens/navalha.png" id="7_5o2jn"]
+[ext_resource type="Texture2D" uid="uid://scbacuypnkk4" path="res://Assets/Ui/button1.png" id="7_dqtjc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x6js8"]
+texture = ExtResource("7_dqtjc")
+region_rect = Rect2(7.543518, 22.959518, 84.54538, 43.329956)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lg2j6"]
+texture = ExtResource("7_dqtjc")
+region_rect = Rect2(8.107162, 22.230288, 83.7872, 45.48448)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0o5pn"]
+texture = ExtResource("4_dqtjc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dqtjc"]
+texture = ExtResource("5_jiaay")
+region_rect = Rect2(0, 0, 100, 100)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jiaay"]
+texture = ExtResource("6_c0ufy")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c0ufy"]
+texture = ExtResource("7_5o2jn")
+
+[node name="BarScene" type="Node2D" unique_id=90593021 node_paths=PackedStringArray("BankRollLabel", "BuyPingaBtn", "BuyJokerBtn", "BuyBolsoBtn", "BuyNavalhaBtn", "GoToGameBtn")]
+script = ExtResource("1_pshnu")
+BankRollLabel = NodePath("CanvasLayer/VBoxContainer/BankrollLabel")
+BuyPingaBtn = NodePath("CanvasLayer/VBoxContainer/GridContainer/BuyPingaButton")
+BuyJokerBtn = NodePath("CanvasLayer/VBoxContainer/GridContainer/BuyJokerButton")
+BuyBolsoBtn = NodePath("CanvasLayer/VBoxContainer/GridContainer/BuyBolsoButton")
+BuyNavalhaBtn = NodePath("CanvasLayer/VBoxContainer/GridContainer/BuyNavalhaButton")
+GoToGameBtn = NodePath("CanvasLayer/GoToGambleButton")
+
+[node name="BarBackgroundSprite2D" type="Sprite2D" parent="." unique_id=17093667]
+position = Vector2(576, 216)
+scale = Vector2(2.8733335, 2.8733332)
+texture = ExtResource("2_gr58c")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2100661447]
+
+[node name="GoToGambleButton" type="Button" parent="CanvasLayer" unique_id=1576726886]
+offset_left = 448.0
+offset_top = 488.0
+offset_right = 688.0
+offset_bottom = 554.5685
+theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
+text = "GO BACK"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1373983809]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -97.5
+offset_right = 76.0
+offset_bottom = 97.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BankrollLabel" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=23825906]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/VBoxContainer" unique_id=1441166657]
+layout_mode = 2
+columns = 2
+
+[node name="BuyPingaButton" type="Button" parent="CanvasLayer/VBoxContainer/GridContainer" unique_id=2046572765]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_0o5pn")
+text = "$150"
+icon_alignment = 1
+
+[node name="BuyJokerButton" type="Button" parent="CanvasLayer/VBoxContainer/GridContainer" unique_id=1666184397]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_dqtjc")
+text = "$1000"
+
+[node name="BuyBolsoButton" type="Button" parent="CanvasLayer/VBoxContainer/GridContainer" unique_id=266986089]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+custom_maximum_size = Vector2(128, 128)
+layout_mode = 2
+tooltip_text = "
+"
+theme_override_styles/normal = SubResource("StyleBoxTexture_jiaay")
+text = "$300"
+
+[node name="BuyNavalhaButton" type="Button" parent="CanvasLayer/VBoxContainer/GridContainer" unique_id=1057498950]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_c0ufy")
+text = "$100"
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1454021702]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 446.0
+offset_top = 469.5
+offset_right = 706.0
+offset_bottom = 469.5

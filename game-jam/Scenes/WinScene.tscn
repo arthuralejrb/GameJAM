@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cs81rvhj4jsy5"]
 
-[ext_resource type="Script" uid="uid://e6cllgqfqxc1" path="res://Scripts/WinScene.cs" id="1_3m64s"]
+[ext_resource type="Script" uid="uid://b58n6l2fihkf6" path="res://Scripts/Gameplay/WinScene.cs" id="1_3m64s"]
 [ext_resource type="Texture2D" uid="uid://b4m3cu5n5puvv" path="res://Assets/scene/background.png" id="1_ntd6c"]
 [ext_resource type="Texture2D" uid="uid://crdfevur82ox1" path="res://Assets/logo do jogo.png" id="2_raalc"]
 [ext_resource type="Texture2D" uid="uid://scbacuypnkk4" path="res://Assets/Ui/button1.png" id="4_ubf2f"]

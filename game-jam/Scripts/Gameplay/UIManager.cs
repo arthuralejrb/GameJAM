@@ -139,5 +139,40 @@ namespace GameJAM.Scripts.Gameplay
 			_selectedCardData = null;
 			_selectedCardNode = null;
 		}
+
+		[Export] public HBoxContainer ItemsContainer;
+
+		public void RenderInventory(Player player, System.Action<ItemType> onUseItem)
+		{
+			if (ItemsContainer == null) return;
+
+			// Limpa os ícones antigos
+			foreach (Node child in ItemsContainer.GetChildren())
+			{
+				child.QueueFree();
+			}
+
+			foreach (Item item in player.inventario)
+			{
+				// Cria um botão com textura para renderizar o sprite bonitinho
+				TextureButton itemBtn = new TextureButton();
+				itemBtn.IgnoreTextureSize = true;
+				itemBtn.CustomMinimumSize = new Vector2(64, 64);
+				itemBtn.StretchMode = TextureButton.StretchModeEnum.KeepAspectCentered;
+
+				if (!string.IsNullOrEmpty(item.IconPath) && ResourceLoader.Exists(item.IconPath))
+				{
+					itemBtn.TextureNormal = GD.Load<Texture2D>(item.IconPath);
+				}
+
+				// Tooltip opcional ao passar o mouse por cima do item
+				itemBtn.TooltipText = item.Name;
+
+				// Conecta a ação de clique para usar o item
+				itemBtn.Pressed += () => onUseItem?.Invoke(item.Type);
+
+				ItemsContainer.AddChild(itemBtn);
+			}
+		}
 	}
 }

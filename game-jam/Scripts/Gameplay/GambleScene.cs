@@ -94,7 +94,11 @@ public partial class GambleScene : Node2D
 		GetTree().ChangeSceneToFile("res://Scenes/GameScene.tscn");
 
 	}
-
+	
+	public void OnBarButtonPressed() {
+		GetTree().ChangeSceneToFile("res://Scenes/BarScene.tscn");
+		
+	}
 
 	public void OnMenuButtonPressed()
 	{

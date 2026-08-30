@@ -49,7 +49,7 @@ position = Vector2(576, 352)
 scale = Vector2(2, 2)
 texture = ExtResource("4_jwv4s")
 
-[node name="MainUI" type="CanvasLayer" parent="." unique_id=1879224061 node_paths=PackedStringArray("PlayerScoreLabel", "DealerScoreLabel", "BankRollLabel", "DebtLabel", "BetLabel", "ResultLabel", "HitButton", "StandButton", "TrashButton", "NextRoundButton", "PlayerHandContainer", "DealerHandContainer", "PauseMenuControl", "ResumeButton", "OptionsButton", "QuitButton", "OverlayDimmer", "NextButton")]
+[node name="MainUI" type="CanvasLayer" parent="." unique_id=1879224061 node_paths=PackedStringArray("PlayerScoreLabel", "DealerScoreLabel", "BankRollLabel", "DebtLabel", "BetLabel", "ResultLabel", "HitButton", "StandButton", "TrashButton", "NextRoundButton", "PlayerHandContainer", "DealerHandContainer", "PauseMenuControl", "ResumeButton", "OptionsButton", "QuitButton", "OverlayDimmer", "NextButton", "ItemsContainer")]
 script = ExtResource("2_8gbba")
 PlayerScoreLabel = NodePath("ScoreControl/PlayerScoreLabel")
 DealerScoreLabel = NodePath("ScoreControl/DealerScoreLabel")
@@ -70,6 +70,7 @@ QuitButton = NodePath("PauseMenuControl/QuitButton")
 OverlayDimmer = NodePath("OverlayDimmerColorRect")
 NextButton = NodePath("NextRoundButton")
 CardScene = ExtResource("3_kilg5")
+ItemsContainer = NodePath("ButtonsControl/ItensContainer")
 
 [node name="OverlayDimmerColorRect" type="ColorRect" parent="MainUI" unique_id=1404262093]
 visible = false
@@ -240,8 +241,23 @@ offset_bottom = 637.2
 theme_override_styles/normal = SubResource("StyleBoxTexture_cr6v8")
 theme_override_styles/hover = SubResource("StyleBoxTexture_f43ej")
 
+[node name="ItensContainer" type="HBoxContainer" parent="MainUI/ButtonsControl" unique_id=92951936]
+custom_minimum_size = Vector2(180, 80)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 951.0
+offset_top = 264.0
+offset_right = 1095.0
+offset_bottom = 304.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
 [node name="PauseMenuControl" type="Control" parent="MainUI" unique_id=1229406176 node_paths=PackedStringArray("ResumeButton", "OptionsButton", "QuitButton")]
 process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1151.0
@@ -258,6 +274,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="PausePanelTextureRect" type="TextureRect" parent="MainUI/PauseMenuControl" unique_id=1768317170]
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
