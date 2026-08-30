@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://scbacuypnkk4" path="res://Assets/Ui/button1.png" id="7_x6js8"]
 [ext_resource type="Texture2D" uid="uid://b4nx53lujdubw" path="res://Assets/Ui/contadores.png" id="7_y30xb"]
 [ext_resource type="Script" uid="uid://bqlahkrwb4bhb" path="res://Scripts/Gameplay/PauseMenu.cs" id="10_6vvcf"]
+[ext_resource type="Texture2D" uid="uid://djsov4xstyh43" path="res://Assets/Ui/lixo fechado.png" id="10_f43ej"]
+[ext_resource type="Texture2D" uid="uid://ytwrs8jx7u6g" path="res://Assets/Ui/lixo aberto.png" id="11_7rq2r"]
 [ext_resource type="Texture2D" uid="uid://bngf645kk3q7y" path="res://Assets/Ui/menu de pausa.png" id="11_cr6v8"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x6js8"]
@@ -19,6 +21,14 @@ region_rect = Rect2(7.543518, 22.959518, 84.54538, 43.329956)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lg2j6"]
 texture = ExtResource("7_x6js8")
 region_rect = Rect2(8.107162, 22.230288, 83.7872, 45.48448)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cr6v8"]
+texture = ExtResource("10_f43ej")
+region_rect = Rect2(9, 5, 21, 31)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f43ej"]
+texture = ExtResource("11_7rq2r")
+region_rect = Rect2(7, 3, 22, 31)
 
 [node name="Main" type="Node2D" unique_id=1440761591 node_paths=PackedStringArray("UI")]
 script = ExtResource("1_jjgbg")
@@ -222,13 +232,13 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
 text = "STAND"
 
 [node name="TrashButton" type="Button" parent="MainUI/ButtonsControl" unique_id=1639164472]
-visible = false
 layout_mode = 0
-offset_left = 755.0
-offset_top = 486.0
-offset_right = 888.0
-offset_bottom = 517.0
-text = "TRASH"
+offset_left = 850.0
+offset_top = 540.0
+offset_right = 934.0
+offset_bottom = 637.2
+theme_override_styles/normal = SubResource("StyleBoxTexture_cr6v8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_f43ej")
 
 [node name="PauseMenuControl" type="Control" parent="MainUI" unique_id=1229406176 node_paths=PackedStringArray("ResumeButton", "OptionsButton", "QuitButton")]
 process_mode = 3
@@ -286,6 +296,7 @@ text = "MAIN MENU
 [connection signal="pressed" from="MainUI/NextRoundButton" to="." method="OnNextButtonPressed"]
 [connection signal="pressed" from="MainUI/ButtonsControl/HitButton" to="." method="OnHitButtonPressed"]
 [connection signal="pressed" from="MainUI/ButtonsControl/StandButton" to="." method="OnStandButtonPressed"]
+[connection signal="pressed" from="MainUI/ButtonsControl/TrashButton" to="." method="OnTrashButtonPressed"]
 [connection signal="pressed" from="MainUI/PauseMenuControl/ResumeButton" to="MainUI/PauseMenuControl" method="OnResumeButtonPressed"]
 [connection signal="pressed" from="MainUI/PauseMenuControl/OptionsButton" to="MainUI/PauseMenuControl" method="OnOptionsButtonPressed"]
 [connection signal="pressed" from="MainUI/PauseMenuControl/QuitButton" to="MainUI/PauseMenuControl" method="OnQuitButtonPressed"]

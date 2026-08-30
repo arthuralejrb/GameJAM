@@ -1,3 +1,67 @@
 [gd_scene format=3 uid="uid://6nnhe25a4reg"]
 
+[ext_resource type="Texture2D" uid="uid://b4m3cu5n5puvv" path="res://Assets/scene/background.png" id="1_gj2ut"]
+[ext_resource type="Texture2D" uid="uid://crdfevur82ox1" path="res://Assets/logo do jogo.png" id="2_1p81w"]
+[ext_resource type="Texture2D" uid="uid://scbacuypnkk4" path="res://Assets/Ui/button1.png" id="3_01cvm"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ikkjq"]
+texture = ExtResource("3_01cvm")
+region_rect = Rect2(7.543518, 22.959518, 84.54538, 43.329956)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yj5ep"]
+texture = ExtResource("3_01cvm")
+region_rect = Rect2(8.107162, 22.230288, 83.7872, 45.48448)
+
 [node name="LoseScene" type="Node2D" unique_id=1587029371]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1945222994]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0.5764706)
+metadata/_edit_use_anchors_ = true
+
+[node name="BackgroundSprite2D" type="Sprite2D" parent="." unique_id=152195733]
+z_index = -1
+position = Vector2(576, 324)
+scale = Vector2(2.9, 2.9)
+texture = ExtResource("1_gj2ut")
+
+[node name="LogoTextureRect" type="TextureRect" parent="." unique_id=379468137]
+texture_filter = 1
+offset_left = 472.0
+offset_top = 16.0
+offset_right = 667.7895
+offset_bottom = 140.0
+texture = ExtResource("2_1p81w")
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="." unique_id=577499303]
+offset_left = 512.0
+offset_top = 192.0
+offset_right = 627.0
+offset_bottom = 251.0
+theme_override_font_sizes/font_size = 20
+text = "YOU LOST!!!
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="." unique_id=801237986]
+offset_left = 480.0
+offset_top = 232.0
+offset_right = 663.0
+offset_bottom = 312.0
+theme_override_font_sizes/font_size = 20
+text = "Try your luck again"
+metadata/_edit_use_anchors_ = true
+
+[node name="MenuButton" type="Button" parent="." unique_id=2065063766]
+offset_left = 504.0
+offset_top = 320.0
+offset_right = 640.0
+offset_bottom = 362.16003
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxTexture_ikkjq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_yj5ep")
+text = "MAIN MENU"
+metadata/_edit_use_anchors_ = true

@@ -7,11 +7,22 @@ namespace GameJAM.Scripts.Gameplay
 		private Deck _deck = new Deck();
 		public List<Card> playerHand { get; private set; } = new List<Card>();
 		public List<Card> dealerHand { get; private set; } = new List<Card>();
-		
+		public Stack<Card> discardPile { get; private set; } = new Stack<Card>();
+
+		public bool hasDiscardedThisRound { get; set; } = false;
 		public int playerWins { get; set; } = 0;
 		public int dealerWins { get; set; } = 0;
-		public int totalRounds {get; set;} = 0;
+		public int totalRounds { get; set; } = 0;
+		public int maxHandSize { get; set; } = 10;
 
+		public void DiscardCard(Card cardToDiscard)
+		{
+			if (playerHand.Contains(cardToDiscard))
+			{
+				playerHand.Remove(cardToDiscard);
+				discardPile.Push(cardToDiscard);
+			}
+		}
 
 		public void StartMatch(double trapChance)
 		{
@@ -21,26 +32,23 @@ namespace GameJAM.Scripts.Gameplay
 			StartRound(trapChance);
 		}
 
-
 		public void StartRound(double trapChance)
 		{
-
+			hasDiscardedThisRound = false;
 			playerHand.Clear();
 			dealerHand.Clear();
+			discardPile.Clear();
 
 			playerHand.Add(_deck.DrawCard(trapChance));
 			playerHand.Add(_deck.DrawCard(trapChance));
 			dealerHand.Add(_deck.DealerDraw(trapChance));
-		
 		}
-
 
 		public void Hit(double trapChance)
 		{
+			if (playerHand.Count >= maxHandSize) return;
 			playerHand.Add(_deck.DrawCard(trapChance));
-			
 		}
-
 
 		public void DealerTurn(double trapChance)
 		{
@@ -52,9 +60,7 @@ namespace GameJAM.Scripts.Gameplay
 				dealerHand.Add(_deck.DealerDraw(trapChance));
 				dealerScore = CalculateScore(dealerHand, true);
 			}
-
 		}
-
 
 		public int CalculateScore(List<Card> hand, bool useRealValue)
 		{
