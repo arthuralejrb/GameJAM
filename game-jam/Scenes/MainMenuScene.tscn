@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://fqg5p6ain47l" path="res://Scripts/Ui/MainMenu.gd" id="1_sb72h"]
 [ext_resource type="Texture2D" uid="uid://b4m3cu5n5puvv" path="res://Assets/scene/background.png" id="2_47sjk"]
+[ext_resource type="Theme" uid="uid://b43qsp7hosvgg" path="res://Assets/Fonte/mainTheme.tres" id="3_c7qge"]
 [ext_resource type="Texture2D" uid="uid://doywxef8m8772" path="res://Assets/Ui/menu.png" id="3_gmxq7"]
 [ext_resource type="Texture2D" uid="uid://scbacuypnkk4" path="res://Assets/Ui/button1.png" id="4_c7qge"]
 [ext_resource type="Texture2D" uid="uid://crdfevur82ox1" path="res://Assets/logo do jogo.png" id="4_x260n"]
@@ -34,6 +35,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_c7qge")
 
 [node name="MenuPanelTextureRect" type="TextureRect" parent="ButtonManager" unique_id=11644932]
 texture_filter = 1

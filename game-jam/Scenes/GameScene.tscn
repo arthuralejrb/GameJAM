@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://btn1t8d6r5ava" path="res://Scenes/CardViewScene.tscn" id="3_kilg5"]
 [ext_resource type="Texture2D" uid="uid://d3k5fif6k87pt" path="res://Assets/scene/table.png" id="4_jwv4s"]
 [ext_resource type="Texture2D" uid="uid://ca3ky6pvwod28" path="res://Assets/scene/dealer.png" id="4_lohlh"]
+[ext_resource type="Theme" uid="uid://b43qsp7hosvgg" path="res://Assets/Fonte/mainTheme.tres" id="7_7rq2r"]
 [ext_resource type="Texture2D" uid="uid://c34ao6smyo2te" path="res://Assets/Ui/contract.png" id="7_lg2j6"]
 [ext_resource type="Texture2D" uid="uid://scbacuypnkk4" path="res://Assets/Ui/button1.png" id="7_x6js8"]
 [ext_resource type="Texture2D" uid="uid://b4nx53lujdubw" path="res://Assets/Ui/contadores.png" id="7_y30xb"]
@@ -88,6 +89,7 @@ offset_left = 456.0
 offset_top = 328.0
 offset_right = 656.0
 offset_bottom = 395.0
+theme = ExtResource("7_7rq2r")
 theme_override_font_sizes/font_size = 36
 theme_override_styles/normal = SubResource("StyleBoxTexture_x6js8")
 theme_override_styles/hover = SubResource("StyleBoxTexture_lg2j6")
@@ -121,6 +123,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("7_7rq2r")
 
 [node name="ScoreCounterTextureRect" type="TextureRect" parent="MainUI/ScoreControl" unique_id=499587347]
 texture_filter = 1
@@ -158,6 +161,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(0.9, 0.9)
+theme = ExtResource("7_7rq2r")
 
 [node name="ContractBackgroundTextureRec" type="TextureRect" parent="MainUI/StatusControl" unique_id=1154586843]
 texture_filter = 1
@@ -207,6 +211,7 @@ anchors_preset = 0
 offset_left = -7.0
 offset_right = 33.0
 offset_bottom = 40.0
+theme = ExtResource("7_7rq2r")
 
 [node name="HitButton" type="Button" parent="MainUI/ButtonsControl" unique_id=1789558300]
 layout_mode = 0
@@ -246,6 +251,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1151.0
 offset_bottom = 659.0
+theme = ExtResource("7_7rq2r")
 script = ExtResource("10_6vvcf")
 ResumeButton = NodePath("ResumeButton")
 OptionsButton = NodePath("OptionsButton")
